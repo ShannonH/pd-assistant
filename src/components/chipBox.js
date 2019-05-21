@@ -39,7 +39,7 @@ class ChipBox extends Component {
         }}
         allowDuplicates={false}
         fullWidth
-        label='Team Names'
+        label="Team Names"
       />
     );
   }

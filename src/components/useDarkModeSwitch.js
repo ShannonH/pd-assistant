@@ -24,10 +24,10 @@ export function UseDarkModeSwitch(props) {
         <Switch
           onChange={handleThemeChange}
           darkMode={props.darkMode}
-          color='primary'
+          color="primary"
         />
       }
-      label='Dark Mode'
+      label="Dark Mode"
     />
   );
 }

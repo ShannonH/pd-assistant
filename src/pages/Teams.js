@@ -8,7 +8,7 @@ class Teams extends Component {
   render() {
     return (
       <div>
-        <Typography variant='h4' gutterBottom component='h2'>
+        <Typography variant="h4" gutterBottom component="h2">
           Polls
         </Typography>
         <Grid container spacing={24}>

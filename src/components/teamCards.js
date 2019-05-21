@@ -43,23 +43,23 @@ function TeamCard(props) {
   return (
     <Card className={classes.card}>
       <CardContent>
-        <Typography gutterBottom variant='h5' component='h2'>
+        <Typography gutterBottom variant="h5" component="h2">
           {teamName}
         </Typography>
       </CardContent>
       <CardActions>
-        <ToolTip title='Projects'>
-          <IconButton size='small' color='secondary'>
+        <ToolTip title="Projects">
+          <IconButton size="small" color="secondary">
             <DevBoardIcon />
           </IconButton>
         </ToolTip>
-        <ToolTip title='Analyses'>
-          <IconButton size='small' color='secondary'>
+        <ToolTip title="Analyses">
+          <IconButton size="small" color="secondary">
             <BarChartIcon />
           </IconButton>
         </ToolTip>
-        <ToolTip title='New Analysis'>
-          <IconButton size='small' color='secondary'>
+        <ToolTip title="New Analysis">
+          <IconButton size="small" color="secondary">
             <AddIcon />
           </IconButton>
         </ToolTip>
