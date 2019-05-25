@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button/index';
 import Typography from '@material-ui/core/Typography/index';
 import LearnEnvStep from '../components/learnEnvStep';
 import { CourseSteps } from '../components/coursesStep';
+import { UsersBlock } from '../components/usersStep';
 import classnames from 'classnames';
 import faker from 'faker';
 
@@ -17,6 +18,7 @@ require('@gouch/to-title-case');
 const fakerCourseId = faker.internet.password();
 const fakerCourseName = faker.company.bs().toTitleCase();
 const fakerCourseDesc = faker.lorem.sentences(3);
+const fakerInstructorUser = faker.internet.userName();
 
 function getSteps() {
   return [
@@ -36,16 +38,16 @@ class HorizontalLinearStepper extends React.Component {
     type: 'ULTRA',
     courseId: fakerCourseId,
     courseName: fakerCourseName,
-    courseDesc: fakerCourseDesc
+    courseDesc: fakerCourseDesc,
+    instructorUserId: fakerInstructorUser,
+    studentCount: 20
   };
 
   handleChange = event => {
-    console.log(event.target.name);
-    console.log(event.target.value);
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  isStepOptional = step => step === 2 || step === 3;
+  isStepOptional = step => step === 3;
 
   handleNext = () => {
     const { activeStep } = this.state;
@@ -165,7 +167,13 @@ class HorizontalLinearStepper extends React.Component {
                           onChange={this.handleChange}
                         />
                       ),
-                      2: 'Create and Enroll Users',
+                      2: (
+                        <UsersBlock
+                          instructor={this.state.instructorUserId}
+                          studentCount={this.state.studentCount}
+                          onChange={this.handleChange}
+                        />
+                      ),
                       3: 'Create Content',
                       4: 'Finish'
                     }[activeStep]

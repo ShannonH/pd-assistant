@@ -1,3 +1,4 @@
+import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles/index';
@@ -8,14 +9,21 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 
 function CourseNameTextField(props) {
   return (
-    <TextField
-      style={{ width: 500 }}
-      value={props.courseName}
-      name={'courseName'}
-      variant={'outlined'}
-      label={'Course Name'}
-      onChange={props.onChange}
-    />
+    <span>
+      <Typography variant={'subtitle1'} component={'span'} gutterBottom>
+        Either keep the randomly generated values below, or customize for your
+        needs.
+      </Typography>
+      <br />
+      <TextField
+        style={{ width: 500 }}
+        value={props.courseName}
+        name={'courseName'}
+        variant={'outlined'}
+        label={'Course Name'}
+        onChange={props.onChange}
+      />
+    </span>
   );
 }
 
