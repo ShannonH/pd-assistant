@@ -58,7 +58,7 @@ const styles = theme => ({
 function NoOptionsMessage(props) {
   return (
     <Typography
-      color="textSecondary"
+      color='textSecondary'
       className={props.selectProps.classes.noOptionsMessage}
       {...props.innerProps}>
       {props.children}
@@ -92,7 +92,7 @@ function Option(props) {
     <MenuItem
       buttonRef={props.innerRef}
       selected={props.isFocused}
-      component="div"
+      component='div'
       style={{
         fontWeight: props.isSelected ? 500 : 400
       }}
@@ -163,9 +163,9 @@ class LearnEnvStep extends React.Component {
     });
   }
 
-  handleChange(event) {
+  handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
-  }
+  };
 
   handleChoice = name => value => {
     this.setState({
@@ -176,7 +176,6 @@ class LearnEnvStep extends React.Component {
     } else {
       this.setState({ hideCustom: true });
     }
-    console.log(this.state);
   };
 
   handleClickShowPassword = () => {
@@ -223,7 +222,7 @@ class LearnEnvStep extends React.Component {
               </Typography>
               <br />
               <TextField
-                margin="normal"
+                margin='normal'
                 type={'url'}
                 onInput={this.handleChange}
                 variant={'outlined'}
@@ -235,7 +234,8 @@ class LearnEnvStep extends React.Component {
               <br /> <br />
               <TextField
                 type={this.state.showPassword ? 'text' : 'password'}
-                margin="normal"
+                autoComplete={'admin-password'}
+                margin='normal'
                 onInput={this.handleChange}
                 variant={'outlined'}
                 label={'Admin Password'}
@@ -243,9 +243,9 @@ class LearnEnvStep extends React.Component {
                 value={this.state.adminPassword}
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment position="end">
+                    <InputAdornment position='end'>
                       <IconButton
-                        aria-label="Toggle password visibility"
+                        aria-label='Toggle password visibility'
                         onClick={this.handleClickShowPassword}>
                         {this.state.showPassword ? (
                           <VisibilityOff />

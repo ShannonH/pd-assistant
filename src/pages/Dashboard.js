@@ -23,7 +23,7 @@ import DataCreator from './DataCreator';
 
 function TabContainer(props) {
   return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
+    <Typography component='div' style={{ padding: 8 * 3 }}>
       {props.children}
     </Typography>
   );
@@ -35,7 +35,7 @@ TabContainer.propTypes = {
 
 function LinkTab(props) {
   return (
-    <Tab component="a" onClick={event => event.preventDefault()} {...props} />
+    <Tab component='a' onClick={event => event.preventDefault()} {...props} />
   );
 }
 
@@ -57,20 +57,20 @@ class NavTabs extends React.Component {
       <NoSsr>
         <MuiThemeProvider theme={this.state.theme}>
           <div className={classnames(classes.root)}>
-            <AppBar position="sticky">
+            <AppBar position='sticky'>
               <Tabs
-                variant="fullWidth"
-                scrollButtons="auto"
+                variant='fullWidth'
+                scrollButtons='auto'
                 value={value}
                 centered
-                textColor="secondary"
+                textColor='secondary'
                 indicatorColor={'secondary'}
                 onChange={this.handleChange}>
-                <LinkTab label="Home" href="home" icon={<HomeIcon />} />
+                <LinkTab label='Home' href='home' icon={<HomeIcon />} />
                 <LinkTab
-                  label="Teams"
-                  href="teams"
-                  textColor="secondary"
+                  label='Teams'
+                  href='teams'
+                  textColor='secondary'
                   icon={<TeamIcon />}
                 />
                 <LinkTab
@@ -79,8 +79,8 @@ class NavTabs extends React.Component {
                   icon={<CreateIcon />}
                 />
                 <LinkTab
-                  label="Risk Analysis"
-                  href="riskAnalysis"
+                  label='Risk Analysis'
+                  href='riskAnalysis'
                   icon={<DashboardIcon />}
                 />
                 <LinkTab
@@ -93,7 +93,7 @@ class NavTabs extends React.Component {
                   href={'settings'}
                   icon={<SettingsIcon />}
                 />
-                <LinkTab label="Help" href="help" icon={<HelpIcon />} />
+                <LinkTab label='Help' href='help' icon={<HelpIcon />} />
               </Tabs>
             </AppBar>
             <div>

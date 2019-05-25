@@ -8,8 +8,15 @@ import StepButton from '@material-ui/core/StepButton';
 import Button from '@material-ui/core/Button/index';
 import Typography from '@material-ui/core/Typography/index';
 import LearnEnvStep from '../components/learnEnvStep';
-import CoursesStep from '../components/coursesStep';
+import { CourseSteps } from '../components/coursesStep';
 import classnames from 'classnames';
+import faker from 'faker';
+
+require('@gouch/to-title-case');
+
+const fakerCourseId = faker.internet.password();
+const fakerCourseName = faker.company.bs().toTitleCase();
+const fakerCourseDesc = faker.lorem.sentences(3);
 
 function getSteps() {
   return [
@@ -21,30 +28,24 @@ function getSteps() {
   ];
 }
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <LearnEnvStep />;
-    case 1:
-      return <CoursesStep />;
-    case 2:
-      return 'Create and Enroll Users';
-    case 3:
-      return 'Create Content';
-    case 4:
-      return 'Finish';
-    default:
-      return 'Unknown step';
-  }
-}
-
 class HorizontalLinearStepper extends React.Component {
   state = {
     activeStep: 0,
-    skipped: new Set()
+    skipped: new Set(),
+    available: 'available',
+    type: 'ULTRA',
+    courseId: fakerCourseId,
+    courseName: fakerCourseName,
+    courseDesc: fakerCourseDesc
   };
 
-  isStepOptional = step => step === 1 || step === 2;
+  handleChange = event => {
+    console.log(event.target.name);
+    console.log(event.target.value);
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  isStepOptional = step => step === 2 || step === 3;
 
   handleNext = () => {
     const { activeStep } = this.state;
@@ -106,7 +107,7 @@ class HorizontalLinearStepper extends React.Component {
 
     // noinspection HtmlDeprecatedAttribute
     return (
-      <div className={classes.root}>
+      <div className={classnames(classes.root)}>
         <Typography variant={'h4'} align={'center'} gutterBottom>
           Data Creator
         </Typography>
@@ -116,7 +117,7 @@ class HorizontalLinearStepper extends React.Component {
             const buttonProps = {};
             if (this.isStepOptional(index)) {
               buttonProps.optional = (
-                <Typography variant="caption">Optional</Typography>
+                <Typography variant='caption'>Optional</Typography>
               );
             }
             if (this.isStepSkipped(index)) {
@@ -135,7 +136,9 @@ class HorizontalLinearStepper extends React.Component {
           <div>
             {activeStep === steps.length ? (
               <div>
-                <Typography className={classnames(classes.instructions)}>
+                <Typography
+                  className={classnames(classes.instructions)}
+                  component={'span'}>
                   All steps completed - you&apos;re finished
                 </Typography>
                 <Button
@@ -146,8 +149,27 @@ class HorizontalLinearStepper extends React.Component {
               </div>
             ) : (
               <div>
-                <Typography className={classnames(classes.instructions)}>
-                  {getStepContent(activeStep)}
+                <Typography
+                  className={classnames(classes.instructions)}
+                  component={'span'}>
+                  {
+                    {
+                      0: <LearnEnvStep />,
+                      1: (
+                        <CourseSteps
+                          courseName={this.state.courseName}
+                          courseId={this.state.courseId}
+                          courseDesc={this.state.courseDesc}
+                          type={this.state.type}
+                          available={this.state.available}
+                          onChange={this.handleChange}
+                        />
+                      ),
+                      2: 'Create and Enroll Users',
+                      3: 'Create Content',
+                      4: 'Finish'
+                    }[activeStep]
+                  }
                 </Typography>
                 <div>
                   <Button
@@ -158,16 +180,16 @@ class HorizontalLinearStepper extends React.Component {
                   </Button>
                   {this.isStepOptional(activeStep) && (
                     <Button
-                      variant="outlined"
-                      color="primary"
+                      variant='outlined'
+                      color='primary'
                       onClick={this.handleSkip}
                       className={classnames(classes.stepperButton)}>
                       Skip
                     </Button>
                   )}
                   <Button
-                    variant="outlined"
-                    color="secondary"
+                    variant='outlined'
+                    color='secondary'
                     onClick={this.handleNext}
                     className={classnames(classes.stepperButton)}>
                     {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
