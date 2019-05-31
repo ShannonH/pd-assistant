@@ -7,9 +7,12 @@ import Step from '@material-ui/core/Step/index';
 import StepButton from '@material-ui/core/StepButton';
 import Button from '@material-ui/core/Button/index';
 import Typography from '@material-ui/core/Typography/index';
-import LearnEnvStep from '../components/learnEnvStep';
+import { LearnEnvStep } from '../components/learnEnvStep';
 import { CourseSteps } from '../components/coursesStep';
 import { UsersBlock } from '../components/usersStep';
+import { ContentSelect } from '../components/contentStep';
+import CreatedCourse from '../components/createdCourse';
+import FinalOptions from '../components/finalOptions';
 import classnames from 'classnames';
 import faker from 'faker';
 
@@ -34,16 +37,33 @@ class HorizontalLinearStepper extends React.Component {
   state = {
     activeStep: 0,
     skipped: new Set(),
-    available: 'available',
+    learnUrl: '',
+    hideCustom: true,
+    adminUsername: 'administrator',
+    adminPassword: 'changeme',
+    available: 'enabled',
     type: 'ULTRA',
     courseId: fakerCourseId,
     courseName: fakerCourseName,
     courseDesc: fakerCourseDesc,
     instructorUserId: fakerInstructorUser,
-    studentCount: 20
+    studentCount: 20,
+    testCount: 0,
+    assignmentCount: 0,
+    documentCount: 0,
+    discussionCount: 0,
+    fileCount: 0
   };
 
   handleChange = event => {
+    if (event.target.value === 'Other' && event.target.name === 'learnUrl') {
+      this.setState({ hideCustom: false });
+      if (event.target.name === 'learnUrl' && event.target.value !== 'Other') {
+        this.setState({ learnUrl: event.target.value });
+        this.setState({ [event.target.name]: event.target.value });
+        this.setState({ hideCustom: true });
+      }
+    }
     this.setState({ [event.target.name]: event.target.value });
   };
 
@@ -88,7 +108,24 @@ class HorizontalLinearStepper extends React.Component {
 
   handleReset = () => {
     this.setState({
-      activeStep: 0
+      activeStep: 0,
+      skipped: new Set(),
+      learnUrl: '',
+      hideCustom: true,
+      adminUsername: 'administrator',
+      adminPassword: 'changeme',
+      available: 'enabled',
+      type: 'ULTRA',
+      courseId: fakerCourseId,
+      courseName: fakerCourseName,
+      courseDesc: fakerCourseDesc,
+      instructorUserId: fakerInstructorUser,
+      studentCount: 20,
+      testCount: 0,
+      assignmentCount: 0,
+      documentCount: 0,
+      discussionCount: 0,
+      fileCount: 0
     });
   };
 
@@ -138,11 +175,19 @@ class HorizontalLinearStepper extends React.Component {
           <div>
             {activeStep === steps.length ? (
               <div>
-                <Typography
-                  className={classnames(classes.instructions)}
-                  component={'span'}>
-                  All steps completed - you&apos;re finished
-                </Typography>
+                <CreatedCourse
+                  hideCustom={this.state.hideCustom}
+                  courseName={this.state.courseName}
+                  courseId={this.state.courseId}
+                  courseDesc={this.state.courseDesc}
+                  available={this.state.available}
+                  type={this.state.type}
+                  instructorUserId={this.state.instructorUserId}
+                  studentCount={this.state.studentCount}
+                  baseUrl={this.state.learnUrl}
+                  adminPassword={this.state.adminPassword}
+                  adminUsername={this.state.adminUsername}
+                />
                 <Button
                   onClick={this.handleReset}
                   className={classnames(classes.stepperButton)}>
@@ -153,10 +198,18 @@ class HorizontalLinearStepper extends React.Component {
               <div>
                 <Typography
                   className={classnames(classes.instructions)}
-                  component={'span'}>
+                  component={'div'}>
                   {
                     {
-                      0: <LearnEnvStep />,
+                      0: (
+                        <LearnEnvStep
+                          learnUrl={this.state.learnUrl}
+                          adminUsername={this.state.adminUsername}
+                          adminPassword={this.state.adminPassword}
+                          onChange={this.handleChange}
+                          hidden={this.state.hideCustom}
+                        />
+                      ),
                       1: (
                         <CourseSteps
                           courseName={this.state.courseName}
@@ -174,8 +227,41 @@ class HorizontalLinearStepper extends React.Component {
                           onChange={this.handleChange}
                         />
                       ),
-                      3: 'Create Content',
-                      4: 'Finish'
+                      3: (
+                        <ContentSelect
+                          onChange={this.handleChange}
+                          testCount={this.state.testCount}
+                          assignmentCount={this.state.assignmentCount}
+                          documentCount={this.state.documentCount}
+                          discussionCount={this.state.discussionCount}
+                          fileCount={this.state.fileCount}
+                        />
+                      ),
+                      4: (
+                        <div
+                          style={{
+                            textAlign: 'left',
+                            paddingLeft: 150,
+                            paddingRight: 150,
+                            paddingBottom: 30
+                          }}>
+                          <FinalOptions
+                            finalUrl={this.state.learnUrl}
+                            courseName={this.state.courseName}
+                            courseId={this.state.courseId}
+                            courseDesc={this.state.courseDesc}
+                            type={this.state.type.toLowerCase().toTitleCase()}
+                            available={this.state.available.toTitleCase()}
+                            instructor={this.state.instructorUserId}
+                            studentCount={this.state.studentCount}
+                            testCount={this.state.testCount}
+                            assignmentCount={this.state.assignmentCount}
+                            documentCount={this.state.documentCount}
+                            discussionCount={this.state.discussionCount}
+                            fileCount={this.state.fileCount}
+                          />
+                        </div>
+                      )
                     }[activeStep]
                   }
                 </Typography>

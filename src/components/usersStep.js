@@ -20,6 +20,7 @@ function InstructorSelect(props) {
         value={props.instructor}
         style={{ paddingRight: 30, paddingBottom: 30 }}
         onChange={props.onChange}
+        component={'div'}
       />
     </span>
   );
@@ -28,11 +29,13 @@ function InstructorSelect(props) {
 function StudentSelect(props) {
   return (
     <TextField
+      name={'studentCount'}
       variant={'outlined'}
       label={'# of Students'}
       value={props.studentCount}
       style={{ width: 100, paddingBottom: 30 }}
       onChange={props.onChange}
+      component={'div'}
     />
   );
 }

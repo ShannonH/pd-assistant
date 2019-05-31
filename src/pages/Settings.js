@@ -83,8 +83,8 @@ class Settings extends Component {
             <Button
               onClick={this.handleSubmit}
               size={'large'}
-              variant="contained"
-              color="secondary">
+              variant='contained'
+              color='secondary'>
               Save
             </Button>
             <Button

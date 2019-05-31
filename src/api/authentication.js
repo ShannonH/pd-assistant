@@ -8,7 +8,6 @@ const debug = debug0('slash-command-template:index');
 
 let bbnonce;
 let loginUrl;
-let adminPassword = '';
 
 axiosCookieJarSupport(axios);
 const cookieJar = new tough.CookieJar();
@@ -22,10 +21,9 @@ const clearUrl = '/webapps/login/?action=logout';
 const nonceUrl = '/webapps/login/?action=login';
 const tokenUrl = '/learn/api/v1/utilities/xsrfToken';
 
-const authenticate = learnEnv => {
+export function authenticate(adminPassword, baseUrl) {
   debug('you are in the authenticate function');
-  instance.defaults.baseURL = learnEnv.baseUrl;
-  adminPassword = learnEnv.password;
+  instance.defaults.baseURL = baseUrl;
 
   return instance
     .post(clearUrl)
@@ -57,9 +55,7 @@ const authenticate = learnEnv => {
       debug(response.status);
       return instance.get(tokenUrl);
     })
-    .catch(() => {
-      console.log('auth crashed');
+    .catch(e => {
+      console.log(e);
     });
-};
-
-module.exports = { authenticate };
+}

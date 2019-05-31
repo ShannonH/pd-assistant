@@ -15,14 +15,14 @@ export const styles = theme => ({
   content: {
     textAlign: 'center',
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing(3),
     height: '100vh',
     overflow: 'auto'
   },
   absolute: {
     position: 'absolute',
-    bottom: theme.spacing.unit * 2,
-    right: theme.spacing.unit * 3
+    bottom: theme.spacing(2),
+    right: theme.spacing(3)
   },
   chartContainer: {
     display: 'inline-block',
@@ -32,15 +32,15 @@ export const styles = theme => ({
     height: 320
   },
   h5: {
-    marginBottom: theme.spacing.unit * 2
+    marginBottom: theme.spacing(2)
   },
   chip: {
-    margin: theme.spacing.unit
+    margin: theme.spacing(1)
   },
   paperSheet: {
     ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(6)
   },
   bottomSave: {
     margin: 20,
@@ -51,19 +51,23 @@ export const styles = theme => ({
     position: 'fixed'
   },
   midTextField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit * 20
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(20)
   },
   choiceContainer: {
     display: 'flex',
     justifyContent: 'center',
     flexWrap: 'wrap'
   },
+  hangingindent: {
+    paddingLeft: 22,
+    textIndent: -22
+  },
   shortFields: {
     width: 500
   },
   progress: {
-    margin: theme.spacing.unit * 2
+    margin: theme.spacing(2)
   },
   actionButtons: {
     display: 'inline',
@@ -74,10 +78,10 @@ export const styles = theme => ({
     fontSize: '14px'
   },
   stepperButton: {
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing(1)
   },
   instructions: {
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1)
   }
 });
