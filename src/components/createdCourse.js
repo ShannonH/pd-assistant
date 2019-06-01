@@ -15,7 +15,7 @@ class CreatedCourse extends Component {
       available: this.props.available,
       type: this.props.type,
       instructorUserId: this.props.instructorUserId,
-      studentCount: this.props.studentCount,
+      studentCount: parseInt(this.props.studentCount),
       baseUrl: this.props.baseUrl,
       adminPassword: this.props.adminPassword,
       adminUsername: this.props.adminUsername
@@ -35,7 +35,6 @@ CreatedCourse.propTypes = {
   type: PropTypes.string.isRequired,
   available: PropTypes.string.isRequired,
   instructorUserId: PropTypes.string.isRequired,
-  studentCount: PropTypes.number.isRequired,
   baseUrl: PropTypes.string.isRequired,
   adminPassword: PropTypes.string.isRequired,
   adminUsername: PropTypes.string.isRequired,

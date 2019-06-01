@@ -30,6 +30,7 @@ export const createCourse = statePayload => {
   }
   //const courseJson = coursePayload(statePayload);
   let tip = authenticate(adminPassword, baseUrl);
+  console.log(tip + ' whatever');
 };
 
 //const createInstructor = () => {};

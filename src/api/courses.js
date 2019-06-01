@@ -21,15 +21,18 @@ const baseCourse = (adminPassword, baseUrl, xsrfToken, coursePayload) => {
   };
   let courseJson = JSON.stringify(coursePayload);
   debug('Here is the course JSON we are sending: ' + courseJson);
-  return instance.post(
-    '/learn/api/v1/courses?fields=courseId,name,ultraStatus,description,externalAccessUrl',
-    courseJson
-  ).then(createdCourse => {
-    if (createdCourse.status === 201) {
-      debug(createdCourse.data.courseId);
-      return createdCourse;
-    }
-  }).catch(error => console.log('Course create failed somewhere :( ' + error));
+  return instance
+    .post(
+      '/learn/api/v1/courses?fields=courseId,name,ultraStatus,description,externalAccessUrl',
+      courseJson
+    )
+    .then(createdCourse => {
+      if (createdCourse.status === 201) {
+        debug(createdCourse.data.courseId);
+        return createdCourse;
+      }
+    })
+    .catch(error => console.log('Course create failed somewhere :( ' + error));
 };
 
 export default baseCourse;

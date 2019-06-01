@@ -1,5 +1,4 @@
 const getLearnConfig = hostname => {
-  console.log(hostname);
   if (hostname === 'ultra-integ') {
     return {
       baseUrl: 'https://ultra-integ.int.bbpd.io',
