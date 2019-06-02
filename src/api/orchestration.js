@@ -20,17 +20,20 @@ let adminPassword = '';
 
 export const createCourse = statePayload => {
   //let learnToken = '';
+  console.log('statePayload: ' + statePayload.learnUrl);
   if (statePayload.hideCustom === true) {
-    let config = getLearnConfig(statePayload.baseUrl);
+    let config = getLearnConfig(statePayload.learnUrl);
     baseUrl = config.baseUrl;
     adminPassword = config.password;
+    console.log('adminPassword: ' + adminPassword);
   } else {
-    baseUrl = statePayload.baseUrl;
+    baseUrl = statePayload.learnUrl;
     adminPassword = statePayload.adminPassword;
   }
   //const courseJson = coursePayload(statePayload);
-  let tip = authenticate(adminPassword, baseUrl);
-  console.log(tip + ' whatever');
+  authenticate(adminPassword, baseUrl).then(response =>
+    console.log('turd ' + response)
+  );
 };
 
 //const createInstructor = () => {};

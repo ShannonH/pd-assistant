@@ -13,55 +13,55 @@ function FinalOptions(props) {
         Here are the selections you've made. If they're correct, click Finish to
         create the course.
       </Typography>
-      <br/>
+      <br />
       <Typography variant={'h6'} component={'div'} gutterBottom>
         Course Name: {props.courseName}
-        <br/>
+        <br />
         Course Id: {props.courseId}
-        <br/>
+        <br />
         <div style={{ paddingLeft: 22, textIndent: -22 }}>
           Course Description: {props.courseDesc}
         </div>
         Course Type: {props.type}
-        <br/>
+        <br />
         Course Availability: {props.available}
-        <br/>
-        Instructor Username: {props.instructor}
-        <br/>
+        <br />
+        Instructor Username: {props.instructorUserId}
+        <br />
         Number of Students: {props.studentCount}
-        <br/>
+        <br />
         {props.testCount > 0 ? (
           <div>
             Number of Tests: {props.testCount}
-            <br/>
+            <br />
           </div>
         ) : null}
         {props.assignmentCount > 0 ? (
           <div>
             Number of Assignments: {props.assignmentCount}
-            <br/>
+            <br />
           </div>
         ) : null}
         {props.discussionCount > 0 ? (
           <div>
             Number of Discussions: {props.discussionCount}
-            <br/>
+            <br />
           </div>
         ) : null}
         {props.documentCount > 0 ? (
           <div>
             Number of Documents: {props.documentCount}
-            <br/>
+            <br />
           </div>
         ) : null}
         {props.fileCount > 0 ? (
           <div>
             Number of Files: {props.fileCount}
-            <br/>
+            <br />
           </div>
         ) : null}
-        {props.finalUrl !== '' ? (
-          <div>This will be created on {props.finalUrl}</div>
+        {props.learnUrl !== '' ? (
+          <div>This will be created on {props.learnUrl}</div>
         ) : (
           <div style={{ color: 'red' }}>
             You need to choose a Learn Environment in Step 1!

@@ -16,7 +16,7 @@ class CreatedCourse extends Component {
       type: this.props.type,
       instructorUserId: this.props.instructorUserId,
       studentCount: parseInt(this.props.studentCount),
-      baseUrl: this.props.baseUrl,
+      learnUrl: this.props.baseUrl,
       adminPassword: this.props.adminPassword,
       adminUsername: this.props.adminUsername
     });

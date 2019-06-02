@@ -37,7 +37,7 @@ class HorizontalLinearStepper extends React.Component {
   state = {
     activeStep: 0,
     skipped: new Set(),
-    learnUrl: '',
+    learnUrl: 'ultra-integ',
     hideCustom: true,
     adminUsername: 'administrator',
     adminPassword: 'changeme',
@@ -246,7 +246,7 @@ class HorizontalLinearStepper extends React.Component {
                             paddingBottom: 30
                           }}>
                           <FinalOptions
-                            finalUrl={this.state.learnUrl}
+                            learnUrl={this.state.learnUrl}
                             courseName={this.state.courseName}
                             courseId={this.state.courseId}
                             courseDesc={this.state.courseDesc}
