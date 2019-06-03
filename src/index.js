@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './home.css';
 import Dashboard from './pages/Dashboard';
 import * as serviceWorker from './serviceWorker';
 

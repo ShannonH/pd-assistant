@@ -29,7 +29,7 @@ function LearnEnvironmentsSelect(props) {
         Either select one of the test servers from the list, or choose 'Other'
         to manually enter a Learn URL and administrator credentials.
       </Typography>
-      <br/>
+      <br />
       <div>
         <TextField
           select
@@ -71,8 +71,8 @@ function CustomEnvironment(props) {
         value={props.learnUrl}
         onChange={props.onChange}
       />
-      <br/>
-      <br/>
+      <br />
+      <br />
       <TextField
         name={'adminUsername'}
         label={'Administrator Username'}
@@ -81,8 +81,8 @@ function CustomEnvironment(props) {
         value={props.adminUsername}
         onChange={props.onChange}
       />
-      <br/>
-      <br/>
+      <br />
+      <br />
       <TextField
         name={'adminPassword'}
         label={'Administrator Password'}
@@ -103,8 +103,8 @@ function LearnEnvStep(props) {
         learnUrl={props.learnUrl}
         onChange={props.onChange}
       />
-      <br/>
-      <br/>
+      <br />
+      <br />
       <CustomEnvironment
         hidden={props.hidden}
         className={classes.fieldsContainer}
@@ -114,7 +114,7 @@ function LearnEnvStep(props) {
         onChange={props.onChange}
         key={props.hidden}
       />
-      <br/>
+      <br />
     </div>
   );
 }
