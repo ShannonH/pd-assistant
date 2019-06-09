@@ -10,7 +10,6 @@ class Teams extends Component {
   render() {
     return (
       <div style={{ padding: 24 }}>
-        <!--suppress HtmlDeprecatedAttribute -->
         <Typography
           style={{ paddingBottom: 10 }}
           align={'left'}
@@ -24,10 +23,10 @@ class Teams extends Component {
             <TeamCard team={'VHS'} />
           </Grid>
           <Grid item md={3}>
-            <TeamCard team={'PVC'}/>
+            <TeamCard team={'PVC'} />
           </Grid>
           <Grid item md={3}>
-            <TeamCard team={'Team With a Long Name for Some Odd Reason'}/>
+            <TeamCard team={'Team With a Long Name for Some Odd Reason'} />
           </Grid>
         </Grid>
         <AddFab href={'./addTeam'} />

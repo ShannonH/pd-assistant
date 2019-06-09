@@ -1,8 +1,21 @@
-<<<<<<< HEAD
 # ep-assistant
 
-=======
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## About
+This project was created to assist EP resources (or anyone in PD, really) who has a need to create some of the things we use on a daily basis:
+* Course and user info - use the Data Creator to generate courses, users, content, etc
+* Risk Analyses - answer a series of questions designed to suss out any risks for your project and then see them presented in different ways
+* UIA Page Objects - provide a page, get a suggested list of page objects from it, then export the code for the ones needed
+
+#### Preview
+<!-- Copy and Paste Me -->
+<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
+  <iframe
+    allow="geolocation; microphone; camera; midi; vr; encrypted-media"
+    src="https://glitch.com/embed/#!/embed/themrsharris-ep-assistant?path=src/components/buttons.js&previewSize=100"
+    alt="themrsharris-ep-assistant on Glitch"
+    style="height: 100%; width: 100%; border: 0;">
+  </iframe>
+</div>
 
 ## Available Scripts
 
@@ -40,34 +53,3 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
->>>>>>> 9c0c487... Initial commit from Create React App

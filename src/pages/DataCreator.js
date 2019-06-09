@@ -144,7 +144,6 @@ class HorizontalLinearStepper extends React.Component {
     const steps = getSteps();
     const { activeStep } = this.state;
 
-    // noinspection HtmlDeprecatedAttribute
     return (
       <div>
         <Typography variant={'h4'} align={'center'} gutterBottom>
