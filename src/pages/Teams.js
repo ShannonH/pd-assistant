@@ -10,7 +10,6 @@ class Teams extends Component {
   render() {
     return (
       <div style={{ padding: 24 }}>
-        <!--suppress HtmlDeprecatedAttribute -->
         <Typography
           style={{ paddingBottom: 10 }}
           align={'left'}
