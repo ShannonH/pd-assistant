@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 import * as PropTypes from 'prop-types';
 import { createCourse } from '../api/orchestration';
@@ -5,9 +6,12 @@ import { createCourse } from '../api/orchestration';
 class CreatedCourse extends Component {
   state = { isLoading: true, courseLink: '' };
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.setState({ isLoading: true });
-    createCourse({
+    axios
+      .post('https://ultra-integ.int.bbpd.io/webapps/login?action=logout')
+      .then(response => console.log(response));
+    /*createCourse({
       hideCustom: this.props.hideCustom,
       courseId: this.props.courseId,
       courseName: this.props.courseName,
@@ -19,12 +23,12 @@ class CreatedCourse extends Component {
       learnUrl: this.props.baseUrl,
       adminPassword: this.props.adminPassword,
       adminUsername: this.props.adminUsername
-    });
+    });*/
     //this.setState({ courseLink: course.externalUrl });
-  }
+  };
 
   render() {
-    return <div>Winning</div>;
+    return <div style={{ padding: 24 }}>Winning</div>;
   }
 }
 
