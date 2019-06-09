@@ -8,14 +8,7 @@ This project was created to assist EP resources (or anyone in PD, really) who ha
 
 ### Preview
 
-<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
-  <iframe
-    allow="geolocation; microphone; camera; midi; vr; encrypted-media"
-    src="https://glitch.com/embed/#!/embed/themrsharris-ep-assistant?path=src/components/buttons.js&previewSize=100"
-    alt="themrsharris-ep-assistant on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+<div class="glitch-embed-wrap" style="height: 420px; width: 100%;"><iframe allow="geolocation; microphone; camera; midi; vr;encrypted-media" src="https://glitch.com/embed/#!/embed/themrsharris-ep-assistant?path=src/components/buttons.js&previewSize=100" alt="themrsharris-ep-assistant on Glitch" style="height: 100%; width: 100%; border: 0;"></iframe></div>
 
 ### Available Scripts
 
