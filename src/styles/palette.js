@@ -1,23 +1,18 @@
 import { createMuiTheme } from '@material-ui/core/styles/index';
 
-export const dark = createMuiTheme({
+export const light = createMuiTheme({
   id: 0,
   typography: {
     useNextVariants: true
   },
   palette: {
-    // type: 'dark',
     primary: {
-      main: '#212121',
-      light: '#373737',
-      dark: '#000000',
+      main: '#5a9fbf',
       contrastText: '#fafafa'
     },
     secondary: {
-      main: '#90caf9',
-      light: '#c3fdff',
-      dark: '#5d99c6',
-      contrastText: '#000000'
+      main: '#454545',
+      contrastText: '#fafafa'
     },
     error: {
       main: '#bb002f',
@@ -26,12 +21,13 @@ export const dark = createMuiTheme({
   }
 });
 
-export const light = createMuiTheme({
+export const dark = createMuiTheme({
   id: 1,
   typography: {
     useNextVariants: true
   },
   palette: {
+    type: 'dark',
     primary: {
       main: '#616161',
       light: '#ffffff',

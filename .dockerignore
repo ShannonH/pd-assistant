@@ -1,0 +1,8 @@
+node_modules
+npm-debug.log
+.bitmap
+bit.json
+bitbucket-pipelines.yml
+.idea
+.bit
+dist

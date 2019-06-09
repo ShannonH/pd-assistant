@@ -4,7 +4,6 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { styles } from '../styles/styles';
 import { withStyles } from '@material-ui/core/styles';
-import { UseDarkModeSwitch } from '../components/useDarkModeSwitch';
 import Button from '@material-ui/core/Button';
 import classNames from 'classnames';
 //import { db } from '../data/database';
@@ -63,7 +62,7 @@ class Settings extends Component {
     const { classes } = this.props;
 
     return (
-      <div>
+      <div align={'left'}>
         <Typography variant={'h4'}>Settings</Typography>
         <br />
         <br />
@@ -78,8 +77,7 @@ class Settings extends Component {
           <ChipBox addOnBlur value={this.state.teams} />
           <br />
           <br />
-          <UseDarkModeSwitch />
-          <div className={classNames(classes.bottomSave)}>
+          <span className={classNames(classes.bottomSave)}>
             <Button
               onClick={this.handleSubmit}
               size={'large'}
@@ -96,7 +94,7 @@ class Settings extends Component {
               onClick={this.handleCancel}>
               Cancel
             </Button>
-          </div>
+          </span>
         </form>
       </div>
     );

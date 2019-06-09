@@ -146,7 +146,7 @@ class HorizontalLinearStepper extends React.Component {
 
     // noinspection HtmlDeprecatedAttribute
     return (
-      <div className={classnames(classes.root)}>
+      <div>
         <Typography variant={'h4'} align={'center'} gutterBottom>
           Data Creator
         </Typography>
