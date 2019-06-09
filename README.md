@@ -6,10 +6,6 @@ This project was created to assist EP resources (or anyone in PD, really) who ha
 * Risk Analyses - answer a series of questions designed to suss out any risks for your project and then see them presented in different ways
 * UIA Page Objects - provide a page, get a suggested list of page objects from it, then export the code for the ones needed
 
-### Preview
-
-<div class="glitch-embed-wrap" style="height: 420px; width: 100%;"><iframe allow="geolocation; microphone; camera; midi; vr;encrypted-media" src="https://glitch.com/embed/#!/embed/themrsharris-ep-assistant?path=src/components/buttons.js&previewSize=100" alt="themrsharris-ep-assistant on Glitch" style="height: 100%; width: 100%; border: 0;"></iframe></div>
-
 ### Available Scripts
 
 In the project directory, you can run:
