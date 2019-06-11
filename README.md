@@ -2,8 +2,8 @@
 
 ## About
 This project was created to assist EP resources (or anyone in PD, really) who has a need to create some of the things we use on a daily basis:
-* Course and user info - use the Data Creator to generate courses, users, content, etc
-* Risk Analyses - answer a series of questions designed to suss out any risks for your project and then see them presented in different ways
+* Course and user info - use the Data Creator to generate courses, users, content, etc  
+* Risk Analyses - answer a series of questions designed to suss out any risks for your project and then see them presented in different ways  
 * UIA Page Objects - provide a page, get a suggested list of page objects from it, then export the code for the ones needed
 
 ### Preview

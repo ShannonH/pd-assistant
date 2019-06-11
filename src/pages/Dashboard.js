@@ -14,9 +14,13 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import classNames from 'classnames';
+import { UserAgentApplication } from 'msal';
 import * as PropTypes from 'prop-types';
 import React, { Suspense, lazy } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
+import { getUserDetails } from '../api/GraphService';
+import NavBar from '../components/NavBar';
+import * as config from '../Config';
 import { dark, light } from '../styles/palette';
 import DarkMode from '@material-ui/icons/Brightness4';
 import LightMode from '@material-ui/icons/Brightness5';
@@ -28,16 +32,40 @@ import SnackBar from '../components/snackbar';
 const Home = lazy(() => import('../pages/Home'));
 const Teams = lazy(() => import('../pages/Teams'));
 const DataCreator = lazy(() => import('../pages/DataCreator'));
+const Calendar = lazy(() => import('../components/Calendar'));
 const Settings = lazy(() => import('../pages/Settings'));
 //const RiskAnalysis = lazy(() => import('../pages/Analyses'));
 //const UIAAssist = lazy(() => import(''));
 
 class Dashboard extends React.Component {
-  state = {
-    darkMode: false,
-    theme: light,
-    open: false
-  };
+  constructor(props) {
+    super(props);
+    this.userAgentApplication = new UserAgentApplication({
+      auth: {
+        clientId: config.appId
+      },
+      cache: {
+        cacheLocation: 'localStorage',
+        storeAuthStateInCookie: true
+      }
+    });
+
+    const user = this.userAgentApplication.getAccount();
+
+    this.state = {
+      isAuthenticated: user !== null,
+      user: {},
+      error: null,
+      theme: light,
+      darkMode: false,
+      open: false
+    };
+
+    if (user) {
+      // Enhance user object with data from Graph
+      this.getUserProfile();
+    }
+  }
 
   handleDrawerOpen = () => {
     this.setState({ open: true });
@@ -92,7 +120,7 @@ class Dashboard extends React.Component {
                   color='secondary'
                   noWrap
                   className={classes.title}>
-                  Quality Assistant
+                  EP Assistant
                 </Typography>
                 <Tooltip title={'Toggle Dark Mode'}>
                   <IconButton color={'secondary'} onClick={this.handleDarkMode}>
@@ -104,6 +132,15 @@ class Dashboard extends React.Component {
                     <NotificationsIcon />
                   </Badge>
                 </IconButton>
+                <NavBar
+                  isAuthenticated={this.state.isAuthenticated}
+                  authButtonMethod={
+                    this.state.isAuthenticated
+                      ? this.logout.bind(this)
+                      : this.login.bind(this)
+                  }
+                  user={this.state.user}
+                />
               </Toolbar>
             </AppBar>
             <Drawer
@@ -135,13 +172,45 @@ class Dashboard extends React.Component {
                   color={'secondary'}
                   className={classNames(classes.progress)}>
                   <Switch>
-                    <Route exact path='/' component={Home} />
-                    <Route path='/home' component={Home} />
+                    <Route
+                      exact
+                      path='/'
+                      render={props => (
+                        <Home
+                          {...props}
+                          isAuthenticated={this.state.isAuthenticated}
+                          user={this.state.user}
+                          authButtonMethod={this.login.bind(this)}
+                        />
+                      )}
+                    />{' '}
+                    />
+                    <Route
+                      path='/home'
+                      render={props => (
+                        <Home
+                          {...props}
+                          isAuthenticated={this.state.isAuthenticated}
+                          user={this.state.user}
+                          authButtonMethod={this.login.bind(this)}
+                        />
+                      )}
+                    />{' '}
+                    />
                     <Route path='/teams' component={Teams} />
                     <Route path='/dataCreator' component={DataCreator} />
                     {/*<Route path='/analyses' component={RiskAnalysis} />*/}
                     {/*<Route path='/uiaAssist' component={UIAAssist} />*/}
-                    <Route path='/settings' component={Settings} />
+                    <Route path={'/calendar'} component={Calendar} />
+                    <Route
+                      path='/settings'
+                      render={props => (
+                        <Settings
+                          {...props}
+                          name={this.state.user.displayName}
+                        />
+                      )}
+                    />
                   </Switch>
                 </Suspense>
               </main>
@@ -151,6 +220,78 @@ class Dashboard extends React.Component {
         </div>
       </MuiThemeProvider>
     );
+  }
+  setErrorMessage(message, debug) {
+    this.setState({
+      error: { message: message, debug: debug }
+    });
+  }
+
+  async login() {
+    try {
+      await this.userAgentApplication.loginPopup({
+        scopes: config.scopes,
+        prompt: 'select_account'
+      });
+      await this.getUserProfile();
+    } catch (err) {
+      const errParts = err.split('|');
+      this.setState({
+        isAuthenticated: false,
+        user: {},
+        error: { message: errParts[1], debug: errParts[0] }
+      });
+    }
+  }
+
+  logout() {
+    this.userAgentApplication.logout();
+  }
+
+  async getUserProfile() {
+    try {
+      // Get the access token silently
+      // If the cache contains a non-expired token, this function
+      // will just return the cached token. Otherwise, it will
+      // make a request to the Azure OAuth endpoint to get a token
+
+      let accessToken = await this.userAgentApplication.acquireTokenSilent({
+        scopes: config.scopes
+      });
+
+      if (accessToken) {
+        // Get the user's profile from Graph
+        const user = await getUserDetails(accessToken);
+        this.setState({
+          isAuthenticated: true,
+          user: {
+            displayName: user.displayName,
+            email: user.mail || user.userPrincipalName
+          },
+          error: null
+        });
+      }
+    } catch (err) {
+      let error = {};
+      if (typeof err === 'string') {
+        const errParts = err.split('|');
+        error =
+          errParts.length > 1
+            ? { message: errParts[1], debug: errParts[0] }
+            : { message: err };
+      } else {
+        error = {
+          message: err.message,
+          debug: JSON.stringify(err)
+        };
+      }
+
+      this.setState({
+        isAuthenticated: false,
+        user: {},
+        error: error
+      });
+    }
   }
 }
 
