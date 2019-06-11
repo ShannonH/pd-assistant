@@ -6,6 +6,9 @@ This project was created to assist EP resources (or anyone in PD, really) who ha
 * Risk Analyses - answer a series of questions designed to suss out any risks for your project and then see them presented in different ways
 * UIA Page Objects - provide a page, get a suggested list of page objects from it, then export the code for the ones needed
 
+### Preview
+A preview of this app can be seen on [Glitch](https://glitch.com/edit/#!/themrsharris-ep-assistant?path=README.md&previewSize=100&attributionHidden=false&previewFirst=false&sidebarCollapsed=false)
+
 ### Available Scripts
 
 In the project directory, you can run:

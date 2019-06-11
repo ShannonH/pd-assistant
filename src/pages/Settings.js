@@ -13,9 +13,7 @@ class Settings extends Component {
     super(props);
 
     this.state = {
-      name: 'shannon',
-      teams: [],
-      theme: ''
+      teams: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -23,9 +21,7 @@ class Settings extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      theme: 'light'
-    });
+    //fetch teams related to this user by their email
   }
 
   handleNameChange(event) {
@@ -45,8 +41,6 @@ class Settings extends Component {
   }
 
   handleSubmit() {
-    //db.push('/users/1/name', this.state.name);
-    // db.push('/users/1/theme', this.state.theme);
     //db.push('/users/1/teams', this.state.teams);
     //this.state.teams.forEach(team => {
     //   db.push('/teams/', team);
@@ -67,13 +61,6 @@ class Settings extends Component {
         <br />
         <br />
         <form id={'settings_form'}>
-          <TextField
-            variant={'outlined'}
-            label={'Name'}
-            onChange={this.handleNameChange.bind(this)}
-          />
-          <br />
-          <br />
           <ChipBox addOnBlur value={this.state.teams} />
           <br />
           <br />

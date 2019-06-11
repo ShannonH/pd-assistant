@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import * as PropTypes from 'prop-types';
-import { createCourse } from '../api/orchestration';
+//import { createCourse } from '../api/orchestration';
 
 class CreatedCourse extends Component {
   state = { isLoading: true, courseLink: '' };

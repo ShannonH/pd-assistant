@@ -7,6 +7,12 @@ import { styles } from '../styles/styles';
 import withStyles from '@material-ui/styles/withStyles';
 
 class Teams extends Component {
+  /*constructor(props) {
+   super(props);
+ }*/
+
+  componentDidMount() {}
+
   render() {
     return (
       <div style={{ padding: 24 }}>

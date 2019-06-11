@@ -1,17 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
+import ErrorMessage from '../components/ErrorMessage';
+import Welcome from '../components/Welcome';
 
-class Home extends Component {
-  /*constructor(props) {
-    super(props);
-  }*/
-
-  componentDidMount() {}
-
-  render() {
-    return <div>Test Page </div>;
+function Home(props) {
+  let error = null;
+  if (props.error) {
+    error = (
+      <ErrorMessage message={props.error.message} debug={props.error.debug} />
+    );
   }
-}
 
-Home.propTypes = {};
+  return (
+    <div>
+      {error}
+      <Welcome
+        isAuthenticated={props.isAuthenticated}
+        user={props.user}
+        authButtonMethod={props.authButtonMethod}
+      />
+    </div>
+  );
+}
 
 export default Home;
