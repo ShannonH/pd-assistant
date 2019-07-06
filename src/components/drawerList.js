@@ -46,11 +46,15 @@ class DrawerList extends React.Component {
           primary='Home'
           icon={<HomeIcon color={'secondary'} />}
         />
-        <ListItemLink
-          to={'/teams'}
-          primary={'Teams'}
-          icon={<TeamIcon color={'secondary'} />}
-        />
+        {this.props.isAuthenticated ? (
+          <ListItemLink
+            to={'/teams'}
+            primary={'Teams'}
+            icon={<TeamIcon color={'secondary'} />}
+          />
+        ) : (
+          ''
+        )}
         <ListItemLink
           to={'/dataCreator'}
           primary={'Data Creator'}
@@ -67,16 +71,22 @@ class DrawerList extends React.Component {
           icon={<CodeIcon color={'secondary'} />}
         />
         <Divider component={'div'} />
-        <ListItemLink
-          icon={<CalendarIcon color={'secondary'} />}
-          primary={'My Calendar'}
-          to={'/calendar'}
-        />
-        <ListItemLink
-          to='/settings'
-          primary='Settings'
-          icon={<SettingsIcon color={'secondary'} />}
-        />
+        {this.props.isAuthenticated ? (
+          <div>
+            <ListItemLink
+              icon={<CalendarIcon color={'secondary'} />}
+              primary={'My Calendar'}
+              to={'/calendar'}
+            />
+            <ListItemLink
+              to='/settings'
+              primary='Settings'
+              icon={<SettingsIcon color={'secondary'} />}
+            />
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     );
   }

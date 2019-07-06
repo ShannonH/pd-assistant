@@ -1,31 +1,40 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
+import { Paper, Button, Typography } from '@material-ui/core';
 
 function WelcomeContent(props) {
-  // If authenticated, greet the user
   if (props.isAuthenticated) {
     return (
       <div>
-        <h2>Welcome, {props.user.displayName}!</h2>
+        <Typography variant={'h4'} gutterBottom style={{ padding: 30 }}>
+          Welcome, {props.user.displayName}!
+        </Typography>
         <p>Use the menu on the left to get started.</p>
-        <br/>
+        <br />
       </div>
     );
   }
 
-  // Not authenticated, present a sign in button
   return (
-    <Button color='primary' onClick={props.authButtonMethod}>
-      Click here to sign in
-    </Button>
+    <div>
+      <Button
+        variant={'outlined'}
+        color='secondary'
+        onClick={props.authButtonMethod}
+        style={{ marginBottom: 30 }}>
+        Click here to sign in
+      </Button>
+      <br />
+      *This will allow you to save your work.
+    </div>
   );
 }
 
 export default function Welcome(props) {
   return (
-    <Paper>
-      <h1>EP Assistant</h1>
+    <Paper style={{ padding: 30 }}>
+      <Typography variant={'h4'} gutterBottom style={{ padding: 30 }}>
+        EP Assistant
+      </Typography>
       <WelcomeContent
         isAuthenticated={props.isAuthenticated}
         user={props.user}

@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import NavigationIcon from '@material-ui/icons/Navigation';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import React from 'react';
 
 const styles = theme => ({
@@ -17,7 +17,7 @@ const styles = theme => ({
     position: 'fixed'
   },
   extendedIcon: {
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing(1)
   }
 });
 
@@ -25,9 +25,13 @@ const FloatingAddButton = props => {
   const { classes } = props;
   return (
     <div>
-      <Fab color="secondary" aria-label="Add" className={classes.fab}>
-        <AddIcon />
-      </Fab>
+      <Fab
+        color='secondary'
+        aria-label='Add'
+        className={classes.fab}
+        href={props.href}
+        children={<AddIcon />}
+      />
     </div>
   );
 };
@@ -35,7 +39,7 @@ const FloatingAddButton = props => {
 const FloatingEditButton = () => {
   return (
     <div>
-      <Fab color="secondary" aria-label="Edit">
+      <Fab color='secondary' aria-label='Edit'>
         <Icon>edit_icon</Icon>
       </Fab>
     </div>
@@ -45,7 +49,7 @@ const FloatingEditButton = () => {
 const FloatingDeleteButton = () => {
   return (
     <div>
-      <Fab disabled aria-label="Delete">
+      <Fab disabled aria-label='Delete'>
         <DeleteIcon />
       </Fab>
     </div>
@@ -55,7 +59,7 @@ const FloatingDeleteButton = () => {
 const WideFloatingButton = ({ message }) => {
   return (
     <div>
-      <Fab variant="extended" id={'wide-fab-id'}>
+      <Fab variant='extended' id={'wide-fab-id'}>
         <NavigationIcon />
         {message}
       </Fab>

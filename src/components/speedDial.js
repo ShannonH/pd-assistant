@@ -16,8 +16,8 @@ const styles = theme => ({
   },
   speedDial: {
     position: 'absolute',
-    bottom: theme.spacing.unit * 2,
-    right: theme.spacing.unit * 3
+    bottom: theme.spacing(2),
+    right: theme.spacing(3)
   }
 });
 
@@ -62,7 +62,7 @@ class SpeedDialTooltipOpen extends React.Component {
     return (
       <div className={classes.root}>
         <SpeedDial
-          ariaLabel="Menu Actions"
+          ariaLabel='Menu Actions'
           className={classes.speedDial}
           hidden={hidden}
           icon={<SpeedDialIcon />}

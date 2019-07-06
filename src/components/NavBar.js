@@ -1,9 +1,6 @@
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
+import { Button, IconButton, Menu, MenuItem } from '@material-ui/core';
 import AvatarButton from '@material-ui/icons/AccountCircleOutlined';
+import React from 'react';
 
 export default function AuthNavItem(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -19,7 +16,12 @@ export default function AuthNavItem(props) {
   if (props.isAuthenticated) {
     return (
       <div>
-        <Button onClick={handleClick}>{props.user.displayName}</Button>
+        <Button
+          color={'secondary'}
+          onClick={handleClick}
+          children={props.user.displayName}
+        />
+
         <Menu
           anchorEl={anchorEl}
           keepMounted
@@ -41,8 +43,9 @@ export default function AuthNavItem(props) {
 
   // Not authenticated, return a sign in link
   return (
-    <IconButton onClick={props.authButtonMethod}>
-      <AvatarButton>Sign In</AvatarButton>
-    </IconButton>
+    <IconButton
+      onClick={props.authButtonMethod}
+      children={<AvatarButton color={'secondary'}>Sign In</AvatarButton>}
+    />
   );
 }
