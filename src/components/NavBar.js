@@ -33,9 +33,9 @@ export default function AuthNavItem(props) {
           <MenuItem
             component={'li'}
             button={true}
-            onClick={props.authButtonMethod}>
-            Sign Out
-          </MenuItem>
+            onClick={props.authButtonMethod}
+            children={'Sign Out'}
+          />
         </Menu>
       </div>
     );

@@ -8,7 +8,6 @@ import HomeIcon from '@material-ui/icons/HomeRounded';
 import DashboardIcon from '@material-ui/icons/DashboardRounded';
 import CreateIcon from '@material-ui/icons/CreateNewFolder';
 import CalendarIcon from '@material-ui/icons/PermContactCalendarRounded';
-import SettingsIcon from '@material-ui/icons/Settings';
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -77,11 +76,6 @@ class DrawerList extends React.Component {
               icon={<CalendarIcon color={'secondary'} />}
               primary={'My Calendar'}
               to={'/calendar'}
-            />
-            <ListItemLink
-              to='/settings'
-              primary='Settings'
-              icon={<SettingsIcon color={'secondary'} />}
             />
           </div>
         ) : (

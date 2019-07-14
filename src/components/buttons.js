@@ -26,6 +26,7 @@ const FloatingAddButton = props => {
   return (
     <div>
       <Fab
+        onClick={props.onClick}
         color='secondary'
         aria-label='Add'
         className={classes.fab}

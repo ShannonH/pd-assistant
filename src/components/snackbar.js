@@ -51,7 +51,7 @@ class SimpleSnackbar extends React.Component {
             horizontal: 'left'
           }}
           open={this.state.open}
-          autoHideDuration={3000}
+          autoHideDuration={2000}
           onClose={this.handleClose}
           message={message}
           action={[

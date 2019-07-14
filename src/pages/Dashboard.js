@@ -32,12 +32,12 @@ import SnackBar from '../components/snackbar';
 import * as config from '../Config';
 import { dark, light } from '../styles/palette';
 import { styles } from '../styles/styles';
+import { asyncFetch } from '../utils/frontEnd';
 
 const Home = lazy(() => import('../pages/Home'));
 const Teams = lazy(() => import('../pages/Teams'));
 const DataCreator = lazy(() => import('../pages/DataCreator'));
 const Calendar = lazy(() => import('../components/Calendar'));
-const Settings = lazy(() => import('../pages/Settings'));
 const Analyses = lazy(() => import('../pages/Analyses'));
 const RiskAnalysisCreator = lazy(() => import('../pages/RiskAnalysisCreator'));
 //const UIAAssist = lazy(() => import(''));
@@ -56,17 +56,24 @@ class Dashboard extends React.Component {
     });
 
     const user = this.userAgentApplication.getAccount();
+
+    function authCallback(error, response) {
+      //handle redirect response here - I feel like it should be where I'm finding or creating the user, but who knows
+      console.log(response);
+    }
+
+    this.userAgentApplication.handleRedirectCallback(authCallback);
+
     this.state = {
       isAuthenticated: user !== null,
       user: {},
-      error: null,
-      theme: light,
       darkMode: false,
+      error: null,
       open: false
     };
 
     if (user) {
-      // Enhance user object with data from Graph
+      // Get data from Graph service
       this.getUserProfile();
     }
   }
@@ -80,11 +87,16 @@ class Dashboard extends React.Component {
   };
 
   handleDarkMode = () => {
-    //this needs refactored to save the choice in localStorage or redis
     if (!this.state.darkMode) {
-      this.setState({ theme: dark, darkMode: true });
+      this.setState({ darkMode: true });
+      asyncFetch('put', '/preferences/' + this.state.user.id, {
+        darkMode: true
+      });
     } else {
-      this.setState({ theme: light, darkMode: false });
+      this.setState({ darkMode: false });
+      asyncFetch('put', '/preferences/' + this.state.user.id, {
+        darkMode: false
+      });
     }
   };
 
@@ -97,7 +109,7 @@ class Dashboard extends React.Component {
     );
 
     return (
-      <MuiThemeProvider theme={this.state.theme}>
+      <MuiThemeProvider theme={this.state.darkMode ? dark : light}>
         <div className={classNames(classes.root)}>
           <CssBaseline />
           <AppBar
@@ -110,15 +122,15 @@ class Dashboard extends React.Component {
               disableGutters={!this.state.open}
               className={classes.toolbar}>
               <IconButton
+                children={<MenuIcon />}
                 color='secondary'
                 aria-label='Open drawer'
                 onClick={this.handleDrawerOpen}
                 className={classNames(
                   classes.menuButton,
                   this.state.open && classes.menuButtonHidden
-                )}>
-                <MenuIcon />
-              </IconButton>
+                )}
+              />
               <Typography
                 component='h1'
                 variant='h6'
@@ -127,17 +139,27 @@ class Dashboard extends React.Component {
                 className={classes.title}>
                 EP Assistant
               </Typography>
-              <Tooltip title={'Toggle Dark Mode'}>
-                <IconButton color={'secondary'} onClick={this.handleDarkMode}>
-                  {this.state.darkMode ? <LightMode /> : <DarkMode />}
-                </IconButton>
+              <Tooltip
+                title={
+                  !this.state.darkMode
+                    ? 'Toggle Dark Mode'
+                    : 'Toggle Light Mode'
+                }>
+                <IconButton
+                  color={'secondary'}
+                  onClick={this.handleDarkMode}
+                  children={this.state.darkMode ? <LightMode /> : <DarkMode />}
+                />
               </Tooltip>
               {this.state.isAuthenticated ? (
-                <IconButton color='secondary'>
-                  <Badge badgeContent={4} color='error'>
-                    <NotificationsIcon />
-                  </Badge>
-                </IconButton>
+                <IconButton
+                  color='secondary'
+                  children={
+                    <Badge badgeContent={4} color='error'>
+                      <NotificationsIcon />
+                    </Badge>
+                  }
+                />
               ) : (
                 ''
               )}
@@ -162,9 +184,10 @@ class Dashboard extends React.Component {
             }}
             open={this.state.open}>
             <div className={classes.toolbarIcon}>
-              <IconButton onClick={this.handleDrawerClose}>
-                <ChevronLeftIcon />
-              </IconButton>
+              <IconButton
+                onClick={this.handleDrawerClose}
+                children={<ChevronLeftIcon />}
+              />
             </div>
             <Divider component={'div'} />
             {drawer}
@@ -203,27 +226,19 @@ class Dashboard extends React.Component {
                     />
                   )}
                 />{' '}
-                <Route path='/teams' component={Teams} />
-                <Route path='/dataCreator' component={DataCreator} />
-                <Route exact path='/analyses' component={Analyses} />
+                <Route
+                  path='/teams'
+                  render={() => <Teams userId={this.state.user.id} />}
+                />
+                <Route path='/dataCreator' render={() => <DataCreator />} />
+                <Route exact path='/analyses' render={() => <Analyses />} />
                 <Route
                   exact
                   path={'/analyses/new'}
-                  component={RiskAnalysisCreator}
+                  render={() => <RiskAnalysisCreator />}
                 />
                 {/*<Route path='/uiaAssist' component={UIAAssist} />*/}
-                <Route path={'/calendar'} component={Calendar} />
-                <Route
-                  path='/settings'
-                  render={props => (
-                    <Settings
-                      {...props}
-                      user={this.state.user}
-                      theme={this.state.theme}
-                      darkMode={this.state.darkMode}
-                    />
-                  )}
-                />
+                <Route path={'/calendar'} render={() => <Calendar />} />
               </Suspense>
             </main>
             <SnackBar />
@@ -231,11 +246,6 @@ class Dashboard extends React.Component {
         </div>
       </MuiThemeProvider>
     );
-  }
-  setErrorMessage(message, debug) {
-    this.setState({
-      error: { message: message, debug: debug }
-    });
   }
 
   async login() {
@@ -246,13 +256,35 @@ class Dashboard extends React.Component {
       });
       await this.getUserProfile();
     } catch (err) {
-      const errParts = err.split('|');
       this.setState({
         isAuthenticated: false,
         user: {},
-        error: { message: errParts[1], debug: errParts[0] }
+        error: { message: err }
       });
     }
+  }
+
+  async findOrCreateUser(user) {
+    //this really needs to use the sequelize findOrCreate or upsert methods, but can't figure it out using epilogue endpoints
+    asyncFetch('get', '/users/' + user.id).then(result => {
+      if (result.message === 'Not Found') {
+        asyncFetch('post', '/users', {
+          displayName: user.displayName,
+          email: user.mail,
+          id: user.id
+        }).then(createdUser =>
+          asyncFetch('post', '/preferences/', {
+            userId: createdUser.id
+          })
+        );
+      } else if (result.id === user.id) {
+        asyncFetch('get', '/preferences/' + user.id).then(result =>
+          this.setState({
+            darkMode: result.darkMode
+          })
+        );
+      }
+    });
   }
 
   logout() {
@@ -265,7 +297,6 @@ class Dashboard extends React.Component {
       // If the cache contains a non-expired token, this function
       // will just return the cached token. Otherwise, it will
       // make a request to the Azure OAuth endpoint to get a token
-
       let accessToken = await this.userAgentApplication.acquireTokenSilent({
         scopes: config.scopes
       });
@@ -274,28 +305,42 @@ class Dashboard extends React.Component {
         const user = await getUserDetails(accessToken);
         this.setState({
           isAuthenticated: true,
+          token: accessToken.accessToken,
           user: {
+            id: user.id,
             displayName: user.displayName,
             email: user.mail || user.userPrincipalName
           },
           error: null
         });
+        await this.findOrCreateUser(user);
       }
-    } catch (err) {
-      let error = {};
-      if (typeof err === 'string') {
-        const errParts = err.split('|');
-        error =
-          errParts.length > 1
-            ? { message: errParts[1], debug: errParts[0] }
-            : { message: err };
-      } else {
-        error = {
-          message: err.message,
-          debug: JSON.stringify(err)
-        };
+    } catch (error) {
+      if (error.errorMessage.indexOf('interaction_required') !== -1) {
+        this.userAgentApplication
+          .acquireTokenPopup({ scopes: ['user.read'] })
+          .then(function(accessTokenResponse) {
+            const user = getUserDetails(accessTokenResponse.accessToken);
+            this.setState({
+              isAuthenticated: true,
+              token: accessTokenResponse.accessToken,
+              user: {
+                id: user.id,
+                displayName: user.displayName,
+                email: user.mail || user.userPrincipalName
+              },
+              error: null
+            });
+          })
+          .then(() => this.findOrCreateUser(this.state.user.id))
+          .catch(function(error) {
+            this.setState({
+              error: { error }
+            });
+            console.log(error);
+          });
       }
-
+      console.log(error);
       this.setState({
         isAuthenticated: false,
         user: {},
@@ -310,29 +355,3 @@ Dashboard.propTypes = {
 };
 
 export default withStyles(styles)(Dashboard);
-
-/* This is the return from graph service for my own account
-Account {accountIdentifier: "552b84b0-da76-485f-ae60-86347a2f398c", homeAccountIdentifier: "NTUyYjg0YjAtZGE3Ni00ODVmLWFlNjAtODYzNDdhMmYzOThj.YmYwYjI5YTItNWU1Yy00YWFhLWJhNGQtYWM5ODhkZjE1ZWE2", userName: "Shannon.Harris@blackboard.com", name: "Shannon Harris", idToken: {…}, …}
-accountIdentifier: "552b84b0-da76-485f-ae60-86347a2f398c"
-environment: "https://login.microsoftonline.com/bf0b29a2-5e5c-4aaa-ba4d-ac988df15ea6/v2.0"
-homeAccountIdentifier: "NTUyYjg0YjAtZGE3Ni00ODVmLWFlNjAtODYzNDdhMmYzOThj.YmYwYjI5YTItNWU1Yy00YWFhLWJhNGQtYWM5ODhkZjE1ZWE2"
-idToken:
-aio: "ATQAy/8LAAAAHGN6156xMJJBggJXACbAETe0Et0SVPhwvPIJBQlr3sYSlNlvI6QHCUGwS12xbfyR"
-aud: "12d73aec-3aa8-4e24-a433-b3c97d1b2b1e"
-exp: 1561240073
-iat: 1561236173
-iss: "https://login.microsoftonline.com/bf0b29a2-5e5c-4aaa-ba4d-ac988df15ea6/v2.0"
-name: "Shannon Harris"
-nbf: 1561236173
-nonce: "3af36b97-0256-46b5-bbae-2c1e0d4c3d8f"
-oid: "552b84b0-da76-485f-ae60-86347a2f398c"
-preferred_username: "Shannon.Harris@blackboard.com"
-sub: "8qR9JhPPrLoLuSL0_I1gro_KSjXdePvJXFB0RwH7ty8"
-tid: "bf0b29a2-5e5c-4aaa-ba4d-ac988df15ea6"
-uti: "MSOukuYj0kyHQGsXxxYiAA"
-ver: "2.0"
-__proto__: Object
-name: "Shannon Harris"
-sid: undefined
-userName: "Shannon.Harris@blackboard.com"
-__proto__: Object */

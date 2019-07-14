@@ -12,59 +12,24 @@ app.use(bodyParser.json());
 
 const database = new Sequelize({
   dialect: 'sqlite',
-  storage: './src/data/ep-assistant.sqlite'
-});
-
-const User = database.define('user', {
-  username: {
-    primaryKey: true,
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  email: {
-    type: Sequelize.STRING,
-    unique: true,
-    validate: { isEmail: true }
+  storage: './src/data/ep-assistant.sqlite',
+  define: {
+    timestamps: false
   }
 });
 
-const Preference = database.define('preference', {
-  useCalendar: Sequelize.BOOLEAN,
-  darkMode: { type: Sequelize.BOOLEAN, defaultValue: false },
-  theme: { type: Sequelize.STRING, defaultValue: 'light' }
-});
-
-const Analysis = database.define('analysis', {
-  title: Sequelize.STRING,
-  type: Sequelize.STRING
-});
-
-const Team = database.define('team', {
-  name: Sequelize.STRING
-});
-
-const Project = database.define('project', {
-  dpNumber: Sequelize.STRING
-});
-
-const Requirement = database.define('requirement', {
-  name: Sequelize.STRING,
-  description: Sequelize.STRING
-});
-
-User.hasMany(Team);
-User.hasMany(Analysis);
-User.hasMany(Project);
-User.hasMany(Preference);
-Project.hasMany(Analysis);
-Project.hasMany(Requirement);
-Team.hasMany(Project);
+const Project = database.import('../data/models/Projects');
+const User = database.import('../data/models/Users');
+const Team = database.import('../data/models/Teams');
+const Analysis = database.import('../data/models/Analysis');
+const Requirement = database.import('../data/models/Requirements');
+const Preference = database.import('../data/models/Preferences');
 
 epilogue.initialize({ app, sequelize: database });
 
 epilogue.resource({
   model: User,
-  endpoints: ['/users', '/users/:username']
+  endpoints: ['/users', '/users/:id']
 });
 
 epilogue.resource({
@@ -83,20 +48,12 @@ epilogue.resource({
 
 epilogue.resource({
   model: Team,
-  endpoints: ['/teams', '/teams/:id'],
-  search: {
-    param: 'searchByUser',
-    attributes: ['username']
-  }
+  endpoints: ['/teams', '/teams/:userId/team/:name', '/teams/:id']
 });
 
 epilogue.resource({
   model: Preference,
-  endpoints: ['/preferences'],
-  search: {
-    param: 'searchByUser',
-    attributes: ['username']
-  }
+  endpoints: ['/preferences', '/preferences/:userId']
 });
 
 epilogue.resource({
@@ -107,6 +64,14 @@ epilogue.resource({
     attributes: ['projectId']
   }
 });
+
+User.hasMany(Team);
+User.hasMany(Analysis);
+User.hasMany(Project);
+User.hasMany(Preference);
+Team.hasMany(Project);
+Project.hasMany(Analysis);
+Project.hasMany(Requirement);
 
 const port = process.env.SERVER_PORT || 3001;
 

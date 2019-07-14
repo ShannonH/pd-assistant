@@ -36,19 +36,21 @@ function TeamCard(props) {
       </CardContent>
       <CardActions>
         <ToolTip title='Projects'>
-          <IconButton size='small' color='secondary'>
-            <DevBoardIcon />
-          </IconButton>
+          <IconButton
+            size='small'
+            color='secondary'
+            children={<DevBoardIcon />}
+          />
         </ToolTip>
         <ToolTip title='Analyses'>
-          <IconButton size='small' color='secondary'>
-            <BarChartIcon />
-          </IconButton>
+          <IconButton
+            size='small'
+            color='secondary'
+            children={<BarChartIcon />}
+          />
         </ToolTip>
         <ToolTip title='New Analysis'>
-          <IconButton size='small' color='secondary'>
-            <AddIcon />
-          </IconButton>
+          <IconButton size='small' color='secondary' children={<AddIcon />} />
         </ToolTip>
       </CardActions>
     </Card>
