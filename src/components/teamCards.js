@@ -1,15 +1,22 @@
-import Card from '@material-ui/core/Card/index';
-import CardActions from '@material-ui/core/CardActions/index';
-import CardContent from '@material-ui/core/CardContent/index';
-import IconButton from '@material-ui/core/IconButton/index';
-import { withStyles } from '@material-ui/core/styles/index';
-import ToolTip from '@material-ui/core/Tooltip/index';
-import Typography from '@material-ui/core/Typography/index';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import AddIcon from '@material-ui/icons/Add';
-import DevBoardIcon from '@material-ui/icons/DeveloperBoard';
+import {
+  Card,
+  CardActions,
+  CardContent,
+  IconButton,
+  withStyles,
+  Tooltip,
+  Typography
+} from '@material-ui/core';
+import {
+  Edit,
+  Delete,
+  BarChart,
+  Add,
+  DeveloperBoard
+} from '@material-ui/icons';
 import * as PropTypes from 'prop-types';
 import React from 'react';
+import { asyncFetch } from '../utils/frontEnd';
 
 const styles = {
   card: {
@@ -23,8 +30,11 @@ const styles = {
 let teamName;
 
 function TeamCard(props) {
-  //let randomImage = Faker.random.image();
   teamName = 'Team ' + props.team;
+
+  async function deleteTeam() {
+    await asyncFetch('delete');
+  }
 
   const { classes } = props;
   return (
@@ -34,24 +44,48 @@ function TeamCard(props) {
           {teamName}
         </Typography>
       </CardContent>
-      <CardActions>
-        <ToolTip title='Projects'>
+      <CardActions style={{ float: 'left' }}>
+        <Tooltip title='Projects'>
           <IconButton
             size='small'
             color='secondary'
-            children={<DevBoardIcon />}
+            children={<DeveloperBoard />}
           />
-        </ToolTip>
-        <ToolTip title='Analyses'>
+        </Tooltip>
+        <Tooltip title='Analyses'>
           <IconButton
             size='small'
             color='secondary'
-            children={<BarChartIcon />}
+            children={<BarChart />}
+            href={'/analysis'}
           />
-        </ToolTip>
-        <ToolTip title='New Analysis'>
-          <IconButton size='small' color='secondary' children={<AddIcon />} />
-        </ToolTip>
+        </Tooltip>
+        <Tooltip title='New Analysis'>
+          <IconButton
+            size='small'
+            color='secondary'
+            children={<Add />}
+            href={'/analyses'}
+          />
+        </Tooltip>
+      </CardActions>
+      <CardActions style={{ float: 'right' }}>
+        <Tooltip title={'Edit Team'}>
+          <IconButton
+            size={'small'}
+            color={'secondary'}
+            children={<Edit />}
+            onClick={props.onEdit}
+          />
+        </Tooltip>
+        <Tooltip title='Remove Team'>
+          <IconButton
+            size='small'
+            color='secondary'
+            children={<Delete />}
+            onClick={deleteTeam}
+          />
+        </Tooltip>
       </CardActions>
     </Card>
   );

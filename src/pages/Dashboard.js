@@ -15,6 +15,7 @@ import {
   Brightness4 as DarkMode,
   Brightness5 as LightMode,
   ChevronLeft as ChevronLeftIcon,
+  Event as CalendarIcon,
   Menu as MenuIcon,
   Notifications as NotificationsIcon
 } from '@material-ui/icons';
@@ -34,12 +35,12 @@ import { dark, light } from '../styles/palette';
 import { styles } from '../styles/styles';
 import { asyncFetch } from '../utils/frontEnd';
 
-const Home = lazy(() => import('../pages/Home'));
-const Teams = lazy(() => import('../pages/Teams'));
-const DataCreator = lazy(() => import('../pages/DataCreator'));
-const Calendar = lazy(() => import('../components/Calendar'));
-const Analyses = lazy(() => import('../pages/Analyses'));
-const RiskAnalysisCreator = lazy(() => import('../pages/RiskAnalysisCreator'));
+const Home = lazy(() => import('./Home'));
+const Teams = lazy(() => import('./Teams'));
+const DataCreator = lazy(() => import('./DataCreator'));
+const Calendar = lazy(() => import('./Calendar'));
+const Analyses = lazy(() => import('./Analyses'));
+const RiskAnalysisCreator = lazy(() => import('./RiskAnalysisCreator'));
 //const UIAAssist = lazy(() => import(''));
 
 class Dashboard extends React.Component {
@@ -86,15 +87,15 @@ class Dashboard extends React.Component {
     this.setState({ open: false });
   };
 
-  handleDarkMode = () => {
+  handleDarkMode = async () => {
     if (!this.state.darkMode) {
       this.setState({ darkMode: true });
-      asyncFetch('put', '/preferences/' + this.state.user.id, {
+      await asyncFetch('put', '/preferences/' + this.state.user.id, {
         darkMode: true
       });
     } else {
       this.setState({ darkMode: false });
-      asyncFetch('put', '/preferences/' + this.state.user.id, {
+      await asyncFetch('put', '/preferences/' + this.state.user.id, {
         darkMode: false
       });
     }
@@ -159,6 +160,15 @@ class Dashboard extends React.Component {
                       <NotificationsIcon />
                     </Badge>
                   }
+                />
+              ) : (
+                ''
+              )}
+              {this.state.isAuthenticated ? (
+                <IconButton
+                  color={'secondary'}
+                  children={<CalendarIcon />}
+                  href={'/calendar'}
                 />
               ) : (
                 ''
@@ -238,7 +248,13 @@ class Dashboard extends React.Component {
                   render={() => <RiskAnalysisCreator />}
                 />
                 {/*<Route path='/uiaAssist' component={UIAAssist} />*/}
-                <Route path={'/calendar'} render={() => <Calendar />} />
+                <Route
+                  path={'/calendar'}
+                  render={() => <Calendar accessToken={this.state.token} />}
+                />
+                {/*
+                <Route path={'/projects'} render={() => <Projects />} />
+*/}
               </Suspense>
             </main>
             <SnackBar />

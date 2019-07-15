@@ -49,6 +49,14 @@ class Teams extends Component {
     });
   };
 
+  handleDeleteTeam(team) {
+    asyncFetch('delete', '/teams/' + this.state.userId + '/team/' + team).then(
+      result => this.state.teams.push(result)
+    );
+  }
+
+  handleEditTeam = () => {};
+
   render() {
     return (
       <div style={{ padding: 24 }}>

@@ -138,7 +138,8 @@ export const styles = theme => ({
   paperSheet2: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(2),
+    backgroundColor: theme.palette.secondary
   },
   bottomSave: {
     margin: 0,
