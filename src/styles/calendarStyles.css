@@ -22,7 +22,7 @@
     --main-color: #1a8fff;
     --text-color: #777;
     --text-color-light: #ccc;
-    --border-color: #eee;
+    --border-color: #979797;
     --bg-color: #f9f9f9;
     --neutral-color: #fff;
 }
@@ -133,7 +133,6 @@ main {
 .calendar .days {
     text-transform: uppercase;
     font-weight: 400;
-    color: var(--text-color-light);
     font-size: 70%;
     padding: 0.75em 0;
     border-bottom: 1px solid var(--border-color);
