@@ -13,3 +13,9 @@ pipelines:
         script: # Modify the commands below to build your repository.
           - npm install
           - npm run start:dev
+    - step:
+        name: Deploy to test
+        deployment: test
+        # trigger: manual  # Uncomment to make this a manual deployment.
+        script:
+          - echo "Deploying to test environment"
