@@ -3,9 +3,14 @@ resources:
     type: compute.v1.instance
     properties:
       zone: us-central1-a
-      machineType: https://www.googleapis.com/compute/v1/projects/tonal-edge-242401/zones/us-central1-a/machineTypes/n1-standard-1
-networkInterfaces:
-  - network: https://www.googleapis.com/compute/v1/projects/tonal-edge-242401/global/networks/default
-    accessConfigs:
-      - name: External NAT
-        type: ONE_TO_ONE_NAT
+      machineType: zones/us-central1-a/machineTypes/n1-standard-1
+      disks:
+        - deviceName: boot
+          type: PERSISTENT
+          boot: true
+          autoDelete: true
+      networkInterfaces:
+        - network: global/networks/default
+          accessConfigs:
+            - name: External NAT
+              type: ONE_TO_ONE_NAT
