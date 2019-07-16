@@ -30,7 +30,6 @@ import DrawerList from '../components/drawerList';
 import ErrorBoundary from '../components/errorBoundary';
 import NavBar from '../components/NavBar';
 import SnackBar from '../components/snackbar';
-import * as config from '../Config';
 import { dark, light } from '../styles/palette';
 import { styles } from '../styles/styles';
 import { asyncFetch } from '../utils/frontEnd';
@@ -48,7 +47,7 @@ class Dashboard extends React.Component {
     super(props);
     this.userAgentApplication = new UserAgentApplication({
       auth: {
-        clientId: config.appId
+        clientId: $appId
       },
       cache: {
         cacheLocation: 'localStorage',
