@@ -48,7 +48,7 @@ class Dashboard extends React.Component {
     super(props);
     this.userAgentApplication = new UserAgentApplication({
       auth: {
-        clientId: config.appId
+        clientId: $appId
       },
       cache: {
         cacheLocation: 'localStorage',
@@ -267,7 +267,7 @@ class Dashboard extends React.Component {
   async login() {
     try {
       await this.userAgentApplication.loginPopup({
-        scopes: config.scopes,
+        scopes: ['user.read', 'calendars.read'],
         prompt: 'select_account'
       });
       await this.getUserProfile();
