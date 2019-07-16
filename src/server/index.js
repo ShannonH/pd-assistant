@@ -10,10 +10,10 @@ const path = require('path');
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.resolve('build')));
 
 app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join('build', 'index.html'));
 });
 
 const database = new Sequelize({
@@ -79,7 +79,7 @@ Team.hasMany(Project);
 Project.hasMany(Analysis);
 Project.hasMany(Requirement);
 
-const port = process.env.SERVER_PORT || 3001;
+const port = process.env.SERVER_PORT || 80;
 
 database.sync().then(() => {
   app.listen(port, () => {
