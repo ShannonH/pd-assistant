@@ -32,6 +32,7 @@
     "moment": "latest",
     "msal": "latest",
     "node": "latest",
+    "npm-run-all": "latest",
     "prop-types": "latest",
     "react": "latest",
     "react-code-splitting": "latest",
@@ -64,7 +65,4 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "npm-run-all": "^4.1.5"
-  }
 }

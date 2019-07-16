@@ -5,6 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const epilogue = require('epilogue');
 const Sequelize = require('sequelize');
+const path = require('path');
 
 const app = express();
 app.use(cors());
