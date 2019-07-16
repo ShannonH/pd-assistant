@@ -267,7 +267,7 @@ class Dashboard extends React.Component {
   async login() {
     try {
       await this.userAgentApplication.loginPopup({
-        scopes: config.scopes,
+        scopes: ['user.read', 'calendars.read'],
         prompt: 'select_account'
       });
       await this.getUserProfile();
@@ -314,7 +314,7 @@ class Dashboard extends React.Component {
       // will just return the cached token. Otherwise, it will
       // make a request to the Azure OAuth endpoint to get a token
       let accessToken = await this.userAgentApplication.acquireTokenSilent({
-        scopes: config.scopes
+        scopes: ['user.read', 'calendars.read']
       });
 
       if (accessToken) {
