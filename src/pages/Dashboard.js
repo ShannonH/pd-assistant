@@ -30,7 +30,6 @@ import DrawerList from '../components/drawerList';
 import ErrorBoundary from '../components/errorBoundary';
 import NavBar from '../components/NavBar';
 import SnackBar from '../components/snackbar';
-import * as config from '../Config';
 import { dark, light } from '../styles/palette';
 import { styles } from '../styles/styles';
 import { asyncFetch } from '../utils/frontEnd';
@@ -314,7 +313,7 @@ class Dashboard extends React.Component {
       // will just return the cached token. Otherwise, it will
       // make a request to the Azure OAuth endpoint to get a token
       let accessToken = await this.userAgentApplication.acquireTokenSilent({
-        scopes: config.scopes
+        scopes: ['user.read', 'calendars.read']
       });
 
       if (accessToken) {
