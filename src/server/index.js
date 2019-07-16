@@ -79,7 +79,7 @@ Team.hasMany(Project);
 Project.hasMany(Analysis);
 Project.hasMany(Requirement);
 
-const port = process.env.SERVER_PORT || 80;
+const port = process.env.SERVER_PORT || 3001;
 
 database.sync().then(() => {
   app.listen(port, () => {
