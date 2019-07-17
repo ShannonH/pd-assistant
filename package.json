@@ -1,0 +1,69 @@
+{
+  "name": "risk-analysis-assistant",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.js",
+  "engines": {
+    "node": "10"
+  },
+  "dependencies": {
+    "@gouch/to-title-case": "latest",
+    "@material-ui/core": "latest",
+    "@material-ui/icons": "latest",
+    "@material-ui/lab": "latest",
+    "@material-ui/styles": "latest",
+    "@microsoft/microsoft-graph-client": "latest",
+    "axios": "latest",
+    "axios-cookiejar-support": "latest",
+    "body-parser": "latest",
+    "cheerio": "latest",
+    "classnames": "latest",
+    "cors": "latest",
+    "date-fns": "latest",
+    "debug": "latest",
+    "dotenv": "latest",
+    "draft-js": "latest",
+    "emotion": "latest",
+    "epilogue": "latest",
+    "express": "latest",
+    "faker": "latest",
+    "local-storage": "latest",
+    "lodash": "latest",
+    "material-ui-chip-input": "latest",
+    "moment": "latest",
+    "msal": "latest",
+    "node": "latest",
+    "npm-run-all": "latest",
+    "prop-types": "latest",
+    "react": "latest",
+    "react-code-splitting": "latest",
+    "react-dom": "latest",
+    "react-router-dom": "latest",
+    "react-scripts": "latest",
+    "sequelize": "4.38.0",
+    "sqlite3": "latest",
+    "tough-cookie": "latest"
+  },
+  "scripts": {
+    "start:dev": "npm-run-all --parallel watch:server start:web",
+    "start": "npm-run-all --parallel start:server start:web",
+    "start:web": "react-scripts start",
+    "start:server": "node src/server",
+    "watch:server": "nodemon --watch src/server src/server",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
