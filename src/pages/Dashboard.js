@@ -49,7 +49,7 @@ class Dashboard extends React.Component {
     super(props);
     this.userAgentApplication = new UserAgentApplication({
       auth: {
-        clientId: config.appId
+        clientId: process.env.MSAL_APPID
       },
       cache: {
         cacheLocation: 'localStorage',
