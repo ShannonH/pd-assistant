@@ -29,7 +29,7 @@ import { getUserDetails } from '../api/GraphService';
 import DrawerList from '../components/drawerList';
 import ErrorBoundary from '../components/errorBoundary';
 import NavBar from '../components/NavBar';
-//import * as config from '../Config';
+import * as config from '../Config';
 import SnackBar from '../components/snackbar';
 import { dark, light } from '../styles/palette';
 import { styles } from '../styles/styles';
@@ -49,7 +49,7 @@ class Dashboard extends React.Component {
     super(props);
     this.userAgentApplication = new UserAgentApplication({
       auth: {
-        clientId: process.env.MSAL_APPID
+        clientId: config.appId
       },
       cache: {
         cacheLocation: 'localStorage',

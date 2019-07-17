@@ -50,11 +50,18 @@ class Teams extends Component {
     });
   };
 
-  handleDeleteTeam(team) {
-    asyncFetch('delete', '/teams/' + this.state.userId + '/team/' + team).then(
-      result => this.state.teams.push(result)
-    );
-  }
+  handleDeleteTeam = async deletedTeam => {
+    await asyncFetch(
+      'delete',
+      '/teams/' + this.state.userId + '/team/' + deletedTeam
+    ).then(result => {
+      if (result.status === '200') {
+        this.setState({
+          options: this.state.teams.filter(c => c !== deletedTeam)
+        });
+      }
+    });
+  };
 
   render() {
     return (
@@ -72,7 +79,7 @@ class Teams extends Component {
             <Grid item md={3} key={team.id}>
               <TeamCard
                 team={team.name}
-                /*onClick={this.handleDeleteTeam(team.name)}*/
+                onClick={this.handleDeleteTeam(team.name)}
               />
             </Grid>
           ))}
