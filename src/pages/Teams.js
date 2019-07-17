@@ -18,6 +18,7 @@ class Teams extends Component {
       newTeam: '',
       editTeam: false
     };
+    this.handleSubmitDialog = this.handleSubmitDialog.bind(this);
   }
 
   componentDidMount() {
@@ -50,14 +51,15 @@ class Teams extends Component {
     });
   };
 
-  handleDeleteTeam = async deletedTeam => {
+  handleDeleteTeam = async e => {
+    console.log(e);
     await asyncFetch(
       'delete',
-      '/teams/' + this.state.userId + '/team/' + deletedTeam
+      '/teams/' + this.state.userId + '/team/' + e
     ).then(result => {
       if (result.status === '200') {
         this.setState({
-          options: this.state.teams.filter(c => c !== deletedTeam)
+          options: this.state.teams.filter(c => c !== e)
         });
       }
     });
@@ -74,11 +76,12 @@ class Teams extends Component {
           component='h2'>
           Teams
         </Typography>
-        <Grid container spacing={5}>
+        <Grid container spacing={5} component={'div'}>
           {this.state.teams.map(team => (
-            <Grid item md={3} key={team.id}>
+            <Grid item md={3} key={team.id} component={'div'}>
               <TeamCard
                 team={team.name}
+                name={team.name}
                 onClick={this.handleDeleteTeam(team.name)}
               />
             </Grid>
