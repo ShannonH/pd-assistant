@@ -5,16 +5,17 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const epilogue = require('epilogue');
 const Sequelize = require('sequelize');
-const path = require('path');
+//const path = require('path');
+//const buildPath = path.resolve('build');
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.resolve('build')));
+//app.use(express.static(buildPath));
 
-app.get('/*', function(req, res) {
-  res.sendFile(path.join('build', 'index.html'));
-});
+/*app.get('/!*', function(req, res) {
+  res.sendFile(path.join(buildPath, 'index.html'));
+});*/
 
 const database = new Sequelize({
   dialect: 'sqlite',

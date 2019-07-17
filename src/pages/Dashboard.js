@@ -24,7 +24,7 @@ import classNames from 'classnames';
 import { UserAgentApplication } from 'msal';
 import * as PropTypes from 'prop-types';
 import React, { lazy, Suspense } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { getUserDetails } from '../api/GraphService';
 import DrawerList from '../components/drawerList';
 import ErrorBoundary from '../components/errorBoundary';
@@ -34,6 +34,7 @@ import SnackBar from '../components/snackbar';
 import { dark, light } from '../styles/palette';
 import { styles } from '../styles/styles';
 import { asyncFetch } from '../utils/frontEnd';
+import { LinkedIconButton } from '../components/buttons';
 
 const Home = lazy(() => import('./Home'));
 const Teams = lazy(() => import('./Teams'));
@@ -165,10 +166,10 @@ class Dashboard extends React.Component {
                 ''
               )}
               {this.state.isAuthenticated ? (
-                <IconButton
+                <LinkedIconButton
                   color={'secondary'}
-                  children={<CalendarIcon />}
-                  href={'/calendar'}
+                  icon={<CalendarIcon color={'secondary'} />}
+                  to={'/calendar'}
                 />
               ) : (
                 ''
@@ -213,48 +214,50 @@ class Dashboard extends React.Component {
                 }
                 color={'secondary'}
                 className={classNames(classes.progress)}>
-                <Route
-                  exact
-                  path='/'
-                  render={props => (
-                    <Home
-                      {...props}
-                      isAuthenticated={this.state.isAuthenticated}
-                      user={this.state.user}
-                      authButtonMethod={this.login.bind(this)}
-                    />
-                  )}
-                />{' '}
-                <Route
-                  path='/home'
-                  render={props => (
-                    <Home
-                      {...props}
-                      isAuthenticated={this.state.isAuthenticated}
-                      user={this.state.user}
-                      authButtonMethod={this.login.bind(this)}
-                    />
-                  )}
-                />{' '}
-                <Route
-                  path='/teams'
-                  render={() => <Teams userId={this.state.user.id} />}
-                />
-                <Route path='/dataCreator' render={() => <DataCreator />} />
-                <Route exact path='/analyses' render={() => <Analyses />} />
-                <Route
-                  exact
-                  path={'/analyses/new'}
-                  render={() => <RiskAnalysisCreator />}
-                />
-                {/*<Route path='/uiaAssist' component={UIAAssist} />*/}
-                <Route
-                  path={'/calendar'}
-                  render={() => <Calendar accessToken={this.state.token} />}
-                />
-                {/*
+                <Switch>
+                  <Route
+                    exact
+                    path='/'
+                    render={props => (
+                      <Home
+                        {...props}
+                        isAuthenticated={this.state.isAuthenticated}
+                        user={this.state.user}
+                        authButtonMethod={this.login.bind(this)}
+                      />
+                    )}
+                  />{' '}
+                  <Route
+                    path='/home'
+                    render={props => (
+                      <Home
+                        {...props}
+                        isAuthenticated={this.state.isAuthenticated}
+                        user={this.state.user}
+                        authButtonMethod={this.login.bind(this)}
+                      />
+                    )}
+                  />{' '}
+                  <Route
+                    path='/teams'
+                    render={() => <Teams userId={this.state.user.id} />}
+                  />
+                  <Route path='/dataCreator' render={() => <DataCreator />} />
+                  <Route exact path='/analyses' render={() => <Analyses />} />
+                  <Route
+                    exact
+                    path={'/analyses/new'}
+                    render={() => <RiskAnalysisCreator />}
+                  />
+                  {/*<Route path='/uiaAssist' component={UIAAssist} />*/}
+                  <Route
+                    path={'/calendar'}
+                    render={() => <Calendar accessToken={this.state.token} />}
+                  />
+                  {/*
                 <Route path={'/projects'} render={() => <Projects />} />
 */}
+                </Switch>
               </Suspense>
             </main>
             <SnackBar />

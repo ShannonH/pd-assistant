@@ -15,7 +15,8 @@ class Teams extends Component {
       teams: [],
       userId: props.userId,
       dialogOpen: false,
-      newTeam: ''
+      newTeam: '',
+      editTeam: false
     };
   }
 
@@ -55,8 +56,6 @@ class Teams extends Component {
     );
   }
 
-  handleEditTeam = () => {};
-
   render() {
     return (
       <div style={{ padding: 24 }}>
@@ -71,7 +70,10 @@ class Teams extends Component {
         <Grid container spacing={5}>
           {this.state.teams.map(team => (
             <Grid item md={3} key={team.id}>
-              <TeamCard team={team.name} />
+              <TeamCard
+                team={team.name}
+                /*onClick={this.handleDeleteTeam(team.name)}*/
+              />
             </Grid>
           ))}
         </Grid>

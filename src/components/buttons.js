@@ -1,3 +1,4 @@
+import { IconButton } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
 import { withStyles } from '@material-ui/core/styles';
@@ -6,6 +7,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import * as PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   fab: {
@@ -68,6 +70,17 @@ const WideFloatingButton = ({ message }) => {
   );
 };
 
+class LinkedIcon extends React.Component {
+  renderLink = React.forwardRef((itemProps, ref) => (
+    <Link to={this.props.to} {...itemProps} ref={ref} />
+  ));
+
+  render() {
+    const { icon } = this.props;
+    return <IconButton component={this.renderLink} children={icon} />;
+  }
+}
+
 FloatingAddButton.propTypes = {
   classes: PropTypes.object.isRequired
 };
@@ -88,5 +101,6 @@ const AddFab = withStyles(styles)(FloatingAddButton);
 const EditFab = withStyles(styles)(FloatingEditButton);
 const DeleteFab = withStyles(styles)(FloatingDeleteButton);
 const WideFab = withStyles(styles)(WideFloatingButton);
+const LinkedIconButton = withStyles(styles)(LinkedIcon);
 
-export { AddFab, EditFab, DeleteFab, WideFab };
+export { AddFab, EditFab, DeleteFab, WideFab, LinkedIconButton };
