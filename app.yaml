@@ -1,6 +1,6 @@
 runtime: nodejs12
 
-instance_class: G1
+instance_class: F1
 
 env_variables:
   MSAL_APPID: "12d73aec-3aa8-4e24-a433-b3c97d1b2b1e"
