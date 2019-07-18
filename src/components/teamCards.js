@@ -30,7 +30,7 @@ let teamName;
 
 function TeamCard(props) {
   teamName = 'Team ' + props.team;
-
+  let handleDelete = props.handleDeleteTeam;
   const { classes } = props;
   return (
     <Card className={classes.card}>
@@ -66,7 +66,11 @@ function TeamCard(props) {
       </CardActions>
       <CardActions style={{ float: 'right' }}>
         <Tooltip title='Remove Team'>
-          <IconButton color='secondary' children={<Delete />} />
+          <IconButton
+            color='secondary'
+            children={<Delete />}
+            onClick={() => handleDelete(props.team)}
+          />
         </Tooltip>
       </CardActions>
     </Card>

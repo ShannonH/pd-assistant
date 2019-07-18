@@ -1,10 +1,19 @@
 import React from 'react';
 import dateFns from 'date-fns';
 import '../styles/calendarStyles.css';
+import { Card } from '@material-ui/core';
 import { getEvents } from '../api/GraphService';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { styles } from '../styles/styles';
 import classNames from 'classnames';
+
+const EventCard = props => {
+  return (
+    <Card raised style={{ width: '70%', margin: 15 }} component={'button'}>
+      Event: {props.eventName}
+    </Card>
+  );
+};
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -85,6 +94,7 @@ class Calendar extends React.Component {
             onClick={() => this.onDateClick(dateFns.parse(cloneDay))}>
             <span className='number'>{formattedDate}</span>
             <span className='bg'>{formattedDate}</span>
+            <EventCard eventName={'Test Event'} />
           </div>
         );
         day = dateFns.addDays(day, 1);
@@ -100,6 +110,7 @@ class Calendar extends React.Component {
   }
 
   onDateClick = day => {
+    console.log(day);
     this.setState({
       selectedDate: day
     });
@@ -117,10 +128,27 @@ class Calendar extends React.Component {
     });
   };
 
-  componentDidMount = async () => {
-    const events = await getEvents(this.props.accessToken);
-    this.setState({ events: events.value });
-  };
+  async componentDidMount() {
+    // Get the user's access token
+    const accessToken = await window.msal.acquireTokenSilent({
+      scopes: ['user.read']
+    });
+    // Get the user's events and push them into state
+    await getEvents(accessToken).then(events =>
+      events.value.forEach(event =>
+        this.state.events.push({
+          event: {
+            id: event.id,
+            subject: event.subject,
+            start: event.start.dateTime,
+            end: event.end.dateTime,
+            organizer: event.organizer.emailAddress.name
+          }
+        })
+      )
+    );
+    console.log(this.state);
+  }
 
   render() {
     const { classes } = this.props;

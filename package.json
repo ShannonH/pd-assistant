@@ -29,7 +29,6 @@
     "faker": "latest",
     "local-storage": "latest",
     "lodash": "latest",
-    "material-ui-chip-input": "latest",
     "moment": "latest",
     "msal": "latest",
     "node": "latest",

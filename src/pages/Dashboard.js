@@ -42,7 +42,8 @@ const DataCreator = lazy(() => import('./DataCreator'));
 const Calendar = lazy(() => import('./Calendar'));
 const Analyses = lazy(() => import('./Analyses'));
 const RiskAnalysisCreator = lazy(() => import('./RiskAnalysisCreator'));
-//const UIAAssist = lazy(() => import(''));
+const UIAAssist = lazy(() => import('./UIAAssist'));
+const Projects = lazy(() => import('./Projects'));
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -249,14 +250,15 @@ class Dashboard extends React.Component {
                     path={'/analyses/new'}
                     render={() => <RiskAnalysisCreator />}
                   />
-                  {/*<Route path='/uiaAssist' component={UIAAssist} />*/}
+                  <Route path='/uiaAssist' component={UIAAssist} />
                   <Route
                     path={'/calendar'}
                     render={() => <Calendar accessToken={this.state.token} />}
                   />
-                  {/*
-                <Route path={'/projects'} render={() => <Projects />} />
-*/}
+                  <Route
+                    path={'/projects'}
+                    render={() => <Projects userId={this.state.user.id} />}
+                  />
                 </Switch>
               </Suspense>
             </main>
@@ -342,7 +344,6 @@ class Dashboard extends React.Component {
             const user = getUserDetails(accessTokenResponse.accessToken);
             this.setState({
               isAuthenticated: true,
-              token: accessTokenResponse.accessToken,
               user: {
                 id: user.id,
                 displayName: user.displayName,

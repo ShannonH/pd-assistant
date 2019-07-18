@@ -15,8 +15,7 @@ class Teams extends Component {
       teams: [],
       userId: props.userId,
       dialogOpen: false,
-      newTeam: '',
-      editTeam: false
+      newTeam: ''
     };
     this.handleSubmitDialog = this.handleSubmitDialog.bind(this);
   }
@@ -51,17 +50,14 @@ class Teams extends Component {
     });
   };
 
-  handleDeleteTeam = async e => {
-    console.log(e);
+  handleDeleteTeam = async team => {
     await asyncFetch(
       'delete',
-      '/teams/' + this.state.userId + '/team/' + e
-    ).then(result => {
-      if (result.status === '200') {
-        this.setState({
-          options: this.state.teams.filter(c => c !== e)
-        });
-      }
+      '/teams/' + this.state.userId + '/team/' + team
+    ).then(() => {
+      this.setState({
+        teams: this.state.teams.filter(c => c.name !== team)
+      });
     });
   };
 
@@ -81,8 +77,7 @@ class Teams extends Component {
             <Grid item md={3} key={team.id} component={'div'}>
               <TeamCard
                 team={team.name}
-                name={team.name}
-                onClick={this.handleDeleteTeam(team.name)}
+                handleDeleteTeam={this.handleDeleteTeam}
               />
             </Grid>
           ))}

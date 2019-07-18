@@ -1,4 +1,5 @@
 import {
+  Card,
   List,
   ListItem,
   ListItemSecondaryAction,
@@ -75,7 +76,9 @@ class Analyses extends Component {
 
     return (
       <Fragment>
-        <Typography variant='h5'>Risk Analysis Manager</Typography>
+        <Typography variant={'h4'} gutterBottom align={'left'}>
+          Risk Analysis Manager
+        </Typography>
         {this.state.analyses.length > 0 ? (
           <Paper elevation={1} className={classnames(classes.posts)}>
             <List component={'ul'}>
@@ -110,7 +113,11 @@ class Analyses extends Component {
         ) : (
           !this.state.loading && (
             <div>
-              <Typography variant='h6'>No analyses to display</Typography>
+              <Card style={{ padding: 20 }}>
+                <Typography variant='h6' gutterBottom align={'left'}>
+                  No analyses to display
+                </Typography>
+              </Card>
             </div>
           )
         )}
