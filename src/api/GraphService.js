@@ -17,6 +17,12 @@ export async function getUserDetails(accessToken) {
   return await client.api('/me').get();
 }
 
+export async function getUserAvatar(accessToken) {
+  const client = getAuthenticatedClient(accessToken);
+  const avatarBlob = await client.api('/me/photos/48x48/$value').get();
+  return URL.createObjectURL(avatarBlob);
+}
+
 export async function getEvents(accessToken) {
   const client = getAuthenticatedClient(accessToken);
 

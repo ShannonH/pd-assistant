@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Typography } from '@material-ui/core';
+import { LinkedAddFab } from '../components/buttons';
+import ProjectTable from '../components/projectCreator/projectTable';
 
 class Projects extends Component {
   constructor(props) {
@@ -15,6 +17,8 @@ class Projects extends Component {
         <Typography variant={'h4'} gutterBottom align={'left'}>
           Projects
         </Typography>
+        <ProjectTable />
+        <LinkedAddFab to={'/projects/new'} />
       </div>
     );
   }

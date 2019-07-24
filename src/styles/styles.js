@@ -28,8 +28,7 @@ export const styles = theme => ({
     paddingBottom: theme.spacing(6)
   },
   midTextField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(20)
+    width: 300
   },
   choiceContainer: {
     display: 'flex',

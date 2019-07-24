@@ -1,4 +1,4 @@
-import { Button, IconButton, Menu, MenuItem } from '@material-ui/core';
+import { IconButton, Menu, MenuItem, Avatar } from '@material-ui/core';
 import AvatarButton from '@material-ui/icons/AccountCircleOutlined';
 import React from 'react';
 
@@ -16,10 +16,11 @@ export default function AuthNavItem(props) {
   if (props.isAuthenticated) {
     return (
       <div>
-        <Button
-          color={'secondary'}
+        <Avatar
+          src={props.avatar}
+          component={'button'}
           onClick={handleClick}
-          children={props.user.displayName}
+          style={{ margin: 10, padding: 0, border: 2 }}
         />
 
         <Menu

@@ -2,7 +2,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import { LEARNS } from '../data/learnEnvironments';
+import { LEARNS } from '../../data/learnEnvironments';
 import Typography from '@material-ui/core/Typography';
 
 const mappedLearns = LEARNS.map(learn => ({

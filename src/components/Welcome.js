@@ -1,11 +1,11 @@
 import React from 'react';
-import { Paper, Button, Typography } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 
 function WelcomeContent(props) {
   if (props.isAuthenticated) {
     return (
       <div>
-        <Typography variant={'h4'} gutterBottom style={{ padding: 30 }}>
+        <Typography variant={'h5'} gutterBottom>
           Welcome, {props.user.displayName}!
         </Typography>
         <p>Use the menu on the left to get started.</p>
@@ -18,21 +18,20 @@ function WelcomeContent(props) {
     <div>
       <Button
         variant={'outlined'}
-        color='secondary'
+        size={'small'}
         onClick={props.authButtonMethod}
-        style={{ marginBottom: 30 }}>
-        Click here to sign in
-      </Button>
-      <br />
-      *This will allow you to save your work.
+        children={
+          <img src={'../../office-365-logo.png'} alt={'Office 365 logo'} />
+        }
+      />
     </div>
   );
 }
 
 export default function Welcome(props) {
   return (
-    <Paper style={{ padding: 30 }}>
-      <Typography variant={'h4'} gutterBottom style={{ padding: 30 }}>
+    <div>
+      <Typography variant={'h4'} gutterBottom style={{ paddingBottom: 10 }}>
         EP Assistant
       </Typography>
       <WelcomeContent
@@ -40,6 +39,6 @@ export default function Welcome(props) {
         user={props.user}
         authButtonMethod={props.authButtonMethod}
       />
-    </Paper>
+    </div>
   );
 }

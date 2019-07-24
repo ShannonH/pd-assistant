@@ -31,6 +31,7 @@ const Team = database.import('../data/models/Teams');
 const Analysis = database.import('../data/models/Analysis');
 const Requirement = database.import('../data/models/Requirements');
 const Preference = database.import('../data/models/Preferences');
+const Integration = database.import('../data/models/Integrations');
 
 epilogue.initialize({ app, sequelize: database });
 
@@ -44,7 +45,7 @@ epilogue.resource({
   endpoints: ['/projects', '/projects/:id'],
   search: {
     param: 'searchByTeam',
-    attributes: ['team']
+    attributes: ['teamName']
   }
 });
 
@@ -72,6 +73,11 @@ epilogue.resource({
   }
 });
 
+epilogue.resource({
+  model: Integration,
+  endpoints: ['/integrations']
+});
+
 User.hasMany(Team);
 User.hasMany(Analysis);
 User.hasMany(Project);
@@ -79,6 +85,7 @@ User.hasMany(Preference);
 Team.hasMany(Project);
 Project.hasMany(Analysis);
 Project.hasMany(Requirement);
+Project.hasMany(Integration);
 
 const port = process.env.SERVER_PORT || 3001;
 

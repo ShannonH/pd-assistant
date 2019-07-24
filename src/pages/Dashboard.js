@@ -25,7 +25,7 @@ import { UserAgentApplication } from 'msal';
 import * as PropTypes from 'prop-types';
 import React, { lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { getUserDetails } from '../api/GraphService';
+import { getUserDetails, getUserAvatar } from '../api/GraphService';
 import DrawerList from '../components/drawerList';
 import ErrorBoundary from '../components/errorBoundary';
 import NavBar from '../components/NavBar';
@@ -44,6 +44,7 @@ const Analyses = lazy(() => import('./Analyses'));
 const RiskAnalysisCreator = lazy(() => import('./RiskAnalysisCreator'));
 const UIAAssist = lazy(() => import('./UIAAssist'));
 const Projects = lazy(() => import('./Projects'));
+const ProjectCreator = lazy(() => import('./ProjectCreator'));
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -155,23 +156,27 @@ class Dashboard extends React.Component {
                 />
               </Tooltip>
               {this.state.isAuthenticated ? (
-                <IconButton
-                  color='secondary'
-                  children={
-                    <Badge badgeContent={4} color='error'>
-                      <NotificationsIcon />
-                    </Badge>
-                  }
-                />
+                <Tooltip title={'Notifications'}>
+                  <IconButton
+                    color='secondary'
+                    children={
+                      <Badge badgeContent={4} color='error'>
+                        <NotificationsIcon />
+                      </Badge>
+                    }
+                  />
+                </Tooltip>
               ) : (
                 ''
               )}
               {this.state.isAuthenticated ? (
-                <LinkedIconButton
-                  color={'secondary'}
-                  icon={<CalendarIcon color={'secondary'} />}
-                  to={'/calendar'}
-                />
+                <Tooltip title={'Calendar'}>
+                  <LinkedIconButton
+                    color={'secondary'}
+                    icon={<CalendarIcon color={'secondary'} />}
+                    to={'/calendar'}
+                  />
+                </Tooltip>
               ) : (
                 ''
               )}
@@ -183,6 +188,7 @@ class Dashboard extends React.Component {
                     : this.login.bind(this)
                 }
                 user={this.state.user}
+                avatar={this.state.avatar}
               />
             </Toolbar>
           </AppBar>
@@ -256,8 +262,15 @@ class Dashboard extends React.Component {
                     render={() => <Calendar accessToken={this.state.token} />}
                   />
                   <Route
+                    exact
                     path={'/projects'}
                     render={() => <Projects userId={this.state.user.id} />}
+                  />
+                  <Route
+                    path={'/projects/new'}
+                    render={() => (
+                      <ProjectCreator userId={this.state.user.id} />
+                    )}
                   />
                 </Switch>
               </Suspense>
@@ -324,6 +337,7 @@ class Dashboard extends React.Component {
 
       if (accessToken) {
         const user = await getUserDetails(accessToken);
+        const userAvatar = await getUserAvatar(accessToken);
         this.setState({
           isAuthenticated: true,
           token: accessToken.accessToken,
@@ -332,6 +346,7 @@ class Dashboard extends React.Component {
             displayName: user.displayName,
             email: user.mail || user.userPrincipalName
           },
+          avatar: userAvatar,
           error: null
         });
         await this.findOrCreateUser(user);
@@ -342,12 +357,14 @@ class Dashboard extends React.Component {
           .acquireTokenPopup({ scopes: ['user.read'] })
           .then(function(accessTokenResponse) {
             const user = getUserDetails(accessTokenResponse.accessToken);
+            const userAvatar = getUserAvatar(accessTokenResponse.accessToken);
             this.setState({
               isAuthenticated: true,
               user: {
                 id: user.id,
                 displayName: user.displayName,
-                email: user.mail || user.userPrincipalName
+                email: user.mail || user.userPrincipalName,
+                avatar: userAvatar
               },
               error: null
             });

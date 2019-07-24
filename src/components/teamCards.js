@@ -7,12 +7,7 @@ import {
   Tooltip,
   Typography
 } from '@material-ui/core';
-import {
-  Delete,
-  BarChart,
-  Add,
-  ViewList as ProjectsIcon
-} from '@material-ui/icons';
+import { Delete, BarChart, ViewList as ProjectsIcon } from '@material-ui/icons';
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import { LinkedIconButton } from './buttons';
@@ -55,12 +50,6 @@ function TeamCard(props) {
           <LinkedIconButton
             icon={<BarChart color='secondary' />}
             to={'/analyses'}
-          />
-        </Tooltip>
-        <Tooltip title='New Analysis'>
-          <LinkedIconButton
-            icon={<Add color='secondary' />}
-            to={'/analyses/new'}
           />
         </Tooltip>
       </CardActions>

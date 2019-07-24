@@ -23,6 +23,22 @@ const styles = theme => ({
   }
 });
 
+class LinkedFab extends React.Component {
+  renderLink = React.forwardRef((itemProps, ref) => (
+    <Link to={this.props.to} {...itemProps} ref={ref} />
+  ));
+  render() {
+    const { classes } = this.props;
+    return (
+      <Fab
+        component={this.renderLink}
+        children={<AddIcon />}
+        className={classes.fab}
+      />
+    );
+  }
+}
+
 const FloatingAddButton = props => {
   const { classes } = props;
   return (
@@ -102,5 +118,6 @@ const EditFab = withStyles(styles)(FloatingEditButton);
 const DeleteFab = withStyles(styles)(FloatingDeleteButton);
 const WideFab = withStyles(styles)(WideFloatingButton);
 const LinkedIconButton = withStyles(styles)(LinkedIcon);
+const LinkedAddFab = withStyles(styles)(LinkedFab);
 
-export { AddFab, EditFab, DeleteFab, WideFab, LinkedIconButton };
+export { AddFab, EditFab, DeleteFab, WideFab, LinkedIconButton, LinkedAddFab };

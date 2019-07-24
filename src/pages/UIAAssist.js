@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField, Typography } from '@material-ui/core';
 
 class UIAAssist extends Component {
   constructor(props) {
@@ -16,9 +16,16 @@ class UIAAssist extends Component {
   render() {
     return (
       <div>
+        <Typography variant={'h4'} gutterBottom align={'left'}>
+          UIA Assist
+        </Typography>
+        <Typography variant={'subtitle1'} gutterBottom align={'left'}>
+          Open the page in your browser, then right click and open the page
+          source. Copy and paste the full HTML below:
+        </Typography>
         <TextField
           variant={'outlined'}
-          name={'sourceHTML'}
+          name={'pageSource'}
           label={'Paste HTML here'}
           multiline
           fullWidth

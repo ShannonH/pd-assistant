@@ -7,12 +7,12 @@ import Step from '@material-ui/core/Step/index';
 import StepButton from '@material-ui/core/StepButton';
 import Button from '@material-ui/core/Button/index';
 import Typography from '@material-ui/core/Typography/index';
-import { LearnEnvStep } from '../components/learnEnvStep';
-import { CourseSteps } from '../components/coursesStep';
-import { UsersBlock } from '../components/usersStep';
-import { ContentSelect } from '../components/contentStep';
-import CreatedCourse from '../components/createdCourse';
-import FinalOptions from '../components/finalOptions';
+import { LearnEnvStep } from '../components/dataCreator/learnEnvStep';
+import { CourseSteps } from '../components/dataCreator/coursesStep';
+import { UsersBlock } from '../components/dataCreator/usersStep';
+import { ContentSelect } from '../components/dataCreator/contentStep';
+import CreatedCourse from '../components/dataCreator/createdCourse';
+import FinalOptions from '../components/dataCreator/finalOptions';
 import classnames from 'classnames';
 import faker from 'faker';
 
@@ -33,7 +33,7 @@ function getSteps() {
   ];
 }
 
-class HorizontalLinearStepper extends React.Component {
+class DataCreator extends React.Component {
   state = {
     activeStep: 0,
     skipped: new Set(),
@@ -91,8 +91,6 @@ class HorizontalLinearStepper extends React.Component {
   handleSkip = () => {
     const { activeStep } = this.state;
     if (!this.isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
       throw new Error("You can't skip a step that isn't optional.");
     }
 
@@ -297,8 +295,8 @@ class HorizontalLinearStepper extends React.Component {
   }
 }
 
-HorizontalLinearStepper.propTypes = {
+DataCreator.propTypes = {
   classes: PropTypes.object
 };
 
-export default withStyles(styles)(HorizontalLinearStepper);
+export default withStyles(styles)(DataCreator);

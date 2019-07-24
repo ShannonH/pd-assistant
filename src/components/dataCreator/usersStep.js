@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles/index';
-import { styles } from '../styles/styles';
+import { styles } from '../../styles/styles';
 import Typography from '@material-ui/core/Typography';
 
 function InstructorSelect(props) {

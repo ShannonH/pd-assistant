@@ -1,5 +1,5 @@
 import React from 'react';
-import dateFns from 'date-fns';
+import * as dateFns from 'date-fns';
 import '../styles/calendarStyles.css';
 import { Card } from '@material-ui/core';
 import { getEvents } from '../api/GraphService';
@@ -27,7 +27,7 @@ class Calendar extends React.Component {
   }
 
   renderHeader() {
-    const dateFormat = 'MMMM YYYY';
+    const dateFormat = 'MMMM yyyy';
 
     return (
       <div className='header row flex-middle'>
@@ -47,7 +47,7 @@ class Calendar extends React.Component {
   }
 
   renderDays() {
-    const dateFormat = 'dddd';
+    const dateFormat = 'eeee';
     const days = [];
 
     let startDate = dateFns.startOfWeek(this.state.currentMonth);
@@ -70,7 +70,7 @@ class Calendar extends React.Component {
     const startDate = dateFns.startOfWeek(monthStart);
     const endDate = dateFns.endOfWeek(monthEnd);
 
-    const dateFormat = 'D';
+    const dateFormat = 'd';
     const rows = [];
 
     let days = [];

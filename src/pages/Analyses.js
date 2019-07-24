@@ -10,15 +10,14 @@ import {
   IconButton,
   withStyles
 } from '@material-ui/core';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import moment from 'moment';
 import { orderBy } from 'lodash';
 import { Delete as DeleteIcon } from '@material-ui/icons';
 import classnames from 'classnames';
 import { styles } from '../styles/styles';
 import { AddFab } from '../components/buttons';
-
-const API = process.env.REACT_APP_API || 'http://localhost:3001';
+import { asyncFetch } from '../utils/frontEnd';
 
 class Analyses extends Component {
   state = {
@@ -30,34 +29,18 @@ class Analyses extends Component {
     this.getAnalyses();
   }
 
-  async fetch(method, endpoint, body) {
-    try {
-      const response = await fetch(`${API}${endpoint}`, {
-        method,
-        body: body && JSON.stringify(body),
-        headers: {
-          'content-type': 'application/json',
-          accept: 'application/json'
-        }
-      });
-      return await response.json();
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   async getAnalyses() {
     this.setState({
       loading: false,
-      posts: await this.fetch('get', '/analysis')
+      posts: await asyncFetch('get', '/analysis')
     });
   }
 
   saveAnalysis = async analysis => {
     if (analysis.id) {
-      await this.fetch('put', `/analysis/${analysis.id}`, analysis);
+      await asyncFetch('put', `/analysis/${analysis.id}`, analysis);
     } else {
-      await this.fetch('post', '/analysis', analysis);
+      await asyncFetch('post', '/analysis', analysis);
     }
 
     this.props.history.goBack();
@@ -66,7 +49,7 @@ class Analyses extends Component {
 
   async deletePost(analysis) {
     if (window.confirm(`Are you sure you want to delete "${analysis.title}"`)) {
-      await this.fetch('delete', `/posts/${analysis.id}`);
+      await asyncFetch('delete', `/posts/${analysis.id}`);
       this.getAnalyses();
     }
   }
@@ -75,7 +58,7 @@ class Analyses extends Component {
     const { classes } = this.props;
 
     return (
-      <Fragment>
+      <div>
         <Typography variant={'h4'} gutterBottom align={'left'}>
           Risk Analysis Manager
         </Typography>
@@ -113,16 +96,38 @@ class Analyses extends Component {
         ) : (
           !this.state.loading && (
             <div>
-              <Card style={{ padding: 20 }}>
+              <Card style={{ padding: 20, textAlign: 'left' }}>
                 <Typography variant='h6' gutterBottom align={'left'}>
                   No analyses to display
                 </Typography>
+                <Typography variant={'subtitle1'} gutterBottom align={'left'}>
+                  To begin using this tool, click the add button below. There
+                  are <em>n</em> types of Risk Analysis that can be created:
+                </Typography>
+                <ul>
+                  <li>
+                    Traditional - type of analysis done to call out areas of the
+                    application that would most benefit from automated UI
+                    testing
+                  </li>
+                  <li>
+                    Team Readiness - this type of analysis helps determine if
+                    your team is the best and most ready team to take on a
+                    project
+                  </li>
+                  <li>
+                    Performance - analyze the kinds of changes being introduced
+                    to uncover areas of the application that may require new
+                    performance tests to be added to one of our performance
+                    suites
+                  </li>
+                </ul>
               </Card>
             </div>
           )
         )}
         <AddFab href={'/analyses/new'} />
-      </Fragment>
+      </div>
     );
   }
 }
