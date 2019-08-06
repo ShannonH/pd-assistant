@@ -141,7 +141,7 @@ class Dashboard extends React.Component {
                 color='secondary'
                 noWrap
                 className={classes.title}>
-                EP Assistant
+                PD Assistant
               </Typography>
               <Tooltip
                 title={

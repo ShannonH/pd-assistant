@@ -1,5 +1,5 @@
 resources:
-  - name: ep-assistant
+  - name: pd-assistant
     type: compute.v1.instance
     properties:
       zone: us-central1-a

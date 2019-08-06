@@ -32,7 +32,7 @@ export default function Welcome(props) {
   return (
     <div>
       <Typography variant={'h4'} gutterBottom style={{ paddingBottom: 10 }}>
-        EP Assistant
+        PD Assistant
       </Typography>
       <WelcomeContent
         isAuthenticated={props.isAuthenticated}
