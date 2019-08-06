@@ -14,7 +14,7 @@ export default function TeamDialog(props) {
       <Dialog open={props.open}>
         <DialogContent>
           <DialogContentText style={{ paddingTop: 20, paddingBottom: 20 }}>
-            Add another team to your profile by entering the team name below:
+            Add a team to your profile by entering the team name below:
           </DialogContentText>
           <TextField
             id='name'

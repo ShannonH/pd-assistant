@@ -21,9 +21,13 @@ class Teams extends Component {
   }
 
   componentDidMount() {
-    asyncFetch('get', '/teams/?userId=' + this.state.userId).then(result =>
-      this.setState({ teams: result })
-    );
+    asyncFetch('get', '/teams/?userId=' + this.state.userId).then(result => {
+      if (result !== null) {
+        this.setState({ teams: result });
+      } else {
+        this.setState({ teams: [] });
+      }
+    });
   }
 
   handleOpenDialog = () => {
@@ -74,7 +78,7 @@ class Teams extends Component {
         </Typography>
         <Grid container spacing={5} component={'div'}>
           {this.state.teams.map(team => (
-            <Grid item md={3} key={team.id} component={'div'}>
+            <Grid item md={3} key={team.name} component={'div'}>
               <TeamCard
                 team={team.name}
                 handleDeleteTeam={this.handleDeleteTeam}

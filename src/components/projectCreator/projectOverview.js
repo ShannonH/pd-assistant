@@ -6,6 +6,7 @@ function ProjectOverview(props) {
     <div>
       <TextField
         label={'Project Name'}
+        required
         variant={'outlined'}
         color={'secondary'}
         name={'projectName'}

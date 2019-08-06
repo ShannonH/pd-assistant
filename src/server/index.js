@@ -56,7 +56,7 @@ epilogue.resource({
 
 epilogue.resource({
   model: Team,
-  endpoints: ['/teams', '/teams/:userId/team/:name', '/teams/:id']
+  endpoints: ['/teams', '/teams/:userId/team/:name', '/teams/:userId']
 });
 
 epilogue.resource({

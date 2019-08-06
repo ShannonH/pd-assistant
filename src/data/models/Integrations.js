@@ -8,6 +8,9 @@ module.exports = (sequelize, DataTypes) => {
     assessments: {
       type: DataTypes.BOOLEAN
     },
+    attendance: {
+      type: DataTypes.BOOLEAN
+    },
     baseNav: {
       type: DataTypes.BOOLEAN
     },

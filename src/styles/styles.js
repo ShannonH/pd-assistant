@@ -147,5 +147,8 @@ export const styles = theme => ({
     bottom: 40,
     left: 'auto',
     position: 'fixed'
+  },
+  integrationChip: {
+    margin: theme.spacing(1)
   }
 });

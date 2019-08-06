@@ -5,20 +5,22 @@ import {
   Step,
   StepLabel,
   Button,
-  Typography
+  Typography,
+  Paper
 } from '@material-ui/core';
 import { styles } from '../styles/styles';
 import ProjectOverview from '../components/projectCreator/projectOverview';
 import ProjectLinktoTeam from '../components/projectCreator/projectLinkToTeam';
-import ProjectIntegrationsQuestions from '../components/projectCreator/projectIntegrationsQuestions';
 import classnames from 'classnames';
 import { asyncFetch } from '../utils/frontEnd';
+import TransferList from '../components/projectCreator/projectIntegrations';
 
 function getSteps() {
   return [
     'Describe the project',
     'Link the project to a scrum team',
-    'Choose interactions'
+    'Choose interactions',
+    'List requirements'
   ];
 }
 
@@ -31,7 +33,26 @@ class ProjectCreator extends Component {
       projectDpLink: '',
       projectDescription: '',
       teamsList: [],
-      projectTeam: {}
+      projectTeam: {},
+      integrations: [
+        'Announcements',
+        'Assessments',
+        'Attendance',
+        'Base Nav',
+        'Calendar',
+        'Content Exchange',
+        'Course Conversion',
+        'Discussions',
+        'Documents',
+        'Text Editor',
+        'Files',
+        'Goals',
+        'Gradebook',
+        'Groups',
+        'LTI',
+        'Notifications',
+        'Telemetry'
+      ]
     };
   }
 
@@ -50,11 +71,11 @@ class ProjectCreator extends Component {
   };
 
   handleTeamChange = e => {
-    console.log(e.target.value);
     this.setState({ projectTeam: e.target.value });
   };
 
   handleNext = () => {
+    console.log(this.state);
     this.setState({
       activeStep: this.state.activeStep + 1
     });
@@ -132,7 +153,19 @@ class ProjectCreator extends Component {
                         onChange={this.handleTeamChange}
                       />
                     ),
-                    2: <ProjectIntegrationsQuestions />
+                    2: (
+                      <Paper style={{ padding: 30 }}>
+                        <Typography
+                          variant={'subtitle1'}
+                          gutterBottom
+                          style={{ marginBottom: 15 }}>
+                          Select any existing areas of the application that this
+                          project will either directly or indirectly use.
+                        </Typography>
+                        <TransferList integrations={this.state.integrations} />
+                      </Paper>
+                    ),
+                    3: 'test text'
                   }[this.state.activeStep]
                 }
               </Typography>

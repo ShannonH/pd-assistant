@@ -1,10 +1,6 @@
-import { IconButton } from '@material-ui/core';
-import Fab from '@material-ui/core/Fab';
-import Icon from '@material-ui/core/Icon';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, Fab, IconButton, Chip, Button } from '@material-ui/core';
+import { Done } from '@material-ui/icons';
 import AddIcon from '@material-ui/icons/Add';
-import DeleteIcon from '@material-ui/icons/Delete';
-import NavigationIcon from '@material-ui/icons/Navigation';
 import * as PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -20,6 +16,12 @@ const styles = theme => ({
   },
   extendedIcon: {
     marginRight: theme.spacing(1)
+  },
+  buttonShell: {
+    borderRadius: 50,
+    padding: 0,
+    margin: 5,
+    textTransform: 'none'
   }
 });
 
@@ -55,35 +57,44 @@ const FloatingAddButton = props => {
   );
 };
 
-const FloatingEditButton = () => {
-  return (
-    <div>
-      <Fab color='secondary' aria-label='Edit'>
-        <Icon>edit_icon</Icon>
-      </Fab>
-    </div>
-  );
-};
-
-const FloatingDeleteButton = () => {
-  return (
-    <div>
-      <Fab disabled aria-label='Delete'>
-        <DeleteIcon />
-      </Fab>
-    </div>
-  );
-};
-
-const WideFloatingButton = ({ message }) => {
-  return (
-    <div>
-      <Fab variant='extended' id={'wide-fab-id'}>
-        <NavigationIcon />
-        {message}
-      </Fab>
-    </div>
-  );
+const SelectableButtonChips = props => {
+  const { classes } = props;
+  if (!props.selected) {
+    return (
+      <Button
+        className={classes.buttonShell}
+        size={'medium'}
+        children={
+          <Chip
+            variant='outlined'
+            icon={props.icon}
+            component={'span'}
+            label={props.label}
+          />
+        }
+        onClick={props.onClick}
+      />
+    );
+  } else if (props.selected) {
+    return (
+      <Button
+        className={classes.buttonShell}
+        size={'medium'}
+        children={
+          <Chip
+            color={'secondary'}
+            variant='outlined'
+            deleteIcon={<Done />}
+            icon={props.icon}
+            component={'span'}
+            label={props.label}
+            onDelete={() => console.log(props.label)}
+          />
+        }
+        onClick={props.onClick}
+      />
+    );
+  }
 };
 
 class LinkedIcon extends React.Component {
@@ -101,23 +112,9 @@ FloatingAddButton.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-FloatingEditButton.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-FloatingDeleteButton.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-WideFloatingButton.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
 const AddFab = withStyles(styles)(FloatingAddButton);
-const EditFab = withStyles(styles)(FloatingEditButton);
-const DeleteFab = withStyles(styles)(FloatingDeleteButton);
-const WideFab = withStyles(styles)(WideFloatingButton);
 const LinkedIconButton = withStyles(styles)(LinkedIcon);
 const LinkedAddFab = withStyles(styles)(LinkedFab);
+const SelectableChip = withStyles(styles)(SelectableButtonChips);
 
-export { AddFab, EditFab, DeleteFab, WideFab, LinkedIconButton, LinkedAddFab };
+export { AddFab, LinkedIconButton, LinkedAddFab, SelectableChip };

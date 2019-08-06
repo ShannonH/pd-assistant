@@ -13,6 +13,7 @@ function ProjectLinkToTeam(props) {
       <br />
       <div>
         <TextField
+          required
           select
           style={{ width: 300 }}
           name={'teamsList'}
@@ -22,7 +23,7 @@ function ProjectLinkToTeam(props) {
           component={'div'}>
           {props.teamsList.map(team => (
             <MenuItem
-              key={team.id}
+              key={team.name}
               value={team.name}
               button={false}
               component={'li'}>

@@ -9,12 +9,12 @@ function ProjectDetails(props) {
         variant={'h6'}
         gutterBottom
         color={'secondary'}
-        style={{ padding: 30 }}>
+        style={{ padding: 20 }}>
         Project Name: {props.name}
       </Typography>
       <Typography
         variant={'subtitle1'}
-        style={{ paddingLeft: 40, paddingRight: 40 }}>
+        style={{ paddingLeft: 40, paddingRight: 40, paddingBottom: 30 }}>
         <b>DP Link:</b> {props.dpLink}
         <br />
         <b> Description: </b>
