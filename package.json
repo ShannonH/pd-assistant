@@ -27,7 +27,6 @@
     "epilogue": "^0.7.1",
     "express": "^4.17.1",
     "faker": "^4.1.0",
-    "jest": "^24.8.0",
     "jest-junit": "^7.0.0",
     "lodash": "^4.17.15",
     "material-table": "^1.45.0",
