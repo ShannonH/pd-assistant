@@ -28,8 +28,5 @@ module.exports = {
   roots: ['<rootDir>/src/'],
   setupFiles: ['<rootDir>/utils/test-setup.js'],
   snapshotSerializers: ['enzyme-to-json/serializer'],
-  testMatch: ['**/__tests__/*.(ts|tsx|js)'],
-  transform: {
-    '^.+\\.tsx?$': 'ts-jest'
-  }
+  testMatch: ['**/__tests__/*.(jsx|js)']
 };
