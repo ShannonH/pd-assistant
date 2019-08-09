@@ -132,16 +132,16 @@ def build() {
   }
 }
 
-def runTests() {
+/* def runTests() {
   container( 'node' ) {
-    sh 'npm run test:ci'
+    sh 'npm run test'
   }
-}
+} */
 
 /**
  * Collect unit test and coverage reports
  */
-def publishTestReports() {
+/* def publishTestReports() {
   // junit report
   junit testDataPublishers: [ [ $class: 'AttachmentPublisher' ] ],
         testResults: 'jest/junit/test-results.xml',
@@ -158,7 +158,7 @@ def publishTestReports() {
       reportName: 'HTML Code Coverage Report'
     ]
   )
-}
+} */
 
 def isProductionBranch() {
   return GIT.isDevelop() || GIT.isMaster() || isReleaseBranch()
