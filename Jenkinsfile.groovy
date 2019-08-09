@@ -123,7 +123,6 @@ def withAnsiColor( Closure block ) {
 def prepare() {
   container( 'node' ) {
     sh 'npm ci'
-    sh 'npm run lint'
   }
 }
 
