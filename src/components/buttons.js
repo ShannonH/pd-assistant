@@ -68,11 +68,11 @@ const SelectableButtonChips = props => {
           <Chip
             variant='outlined'
             icon={props.icon}
-            component={'span'}
+            component={'div'}
             label={props.label}
           />
         }
-        onClick={props.onClick}
+        onClick={props.selectChip}
       />
     );
   } else if (props.selected) {
@@ -86,12 +86,12 @@ const SelectableButtonChips = props => {
             variant='outlined'
             deleteIcon={<Done />}
             icon={props.icon}
-            component={'span'}
+            component={'div'}
             label={props.label}
             onDelete={() => console.log(props.label)}
           />
         }
-        onClick={props.onClick}
+        onClick={props.selectChip}
       />
     );
   }
