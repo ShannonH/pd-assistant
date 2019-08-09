@@ -50,7 +50,11 @@
     "start:server": "node src/server",
     "watch:server": "nodemon --watch src/server src/server",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test:ci": "jest --ci --colors --coverage",
+    "test:coverage": "jest --coverage",
+    "test:update": "jest -u",
+    "test": "jest --no-cache",
+    "test:watch": "jest --watch",
     "eject": "react-scripts eject"
   },
   "browserslist": {
