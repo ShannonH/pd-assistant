@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Async from 'react-code-splitting';
 import { BrowserRouter } from 'react-router-dom';
 
-const dboard = import('./pages/Dashboard');
+import dboard from './pages/Dashboard';
 
 const Dashboard = () => <Async load={dboard} />;
 
@@ -14,4 +14,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-//if (module.hot) module.hot.accept();
+if (module.hot) module.hot.accept();
