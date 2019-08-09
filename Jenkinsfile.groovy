@@ -5,7 +5,7 @@
 
 @Library( 'bb-common@1.x' ) _
 
-GIT_CHECKOUT_URL = 'ssh://stash.bbpd.io/scm/~sharris/pd-assistant.git'
+GIT_CHECKOUT_URL = 'ssh://git@stash.bbpd.io/~sharris/pd-assistant.git'
 PROJECT_NAME = 'pd-assistant'
 SLACK_CHANNEL = '@theshannon'
 
