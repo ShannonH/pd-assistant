@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import Async from 'react-code-splitting';
 import { BrowserRouter } from 'react-router-dom';
 
-const Dashboard = () => <Async load={import('./pages/Dashboard')} />;
+const dboard = import('./pages/Dashboard');
+
+const Dashboard = () => <Async load={dboard} />;
 
 ReactDOM.render(
   <BrowserRouter>

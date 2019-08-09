@@ -71,6 +71,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "react-test-renderer": "^16.9.0"
   }
 }
