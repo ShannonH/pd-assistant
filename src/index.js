@@ -2,14 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Async from 'react-code-splitting';
 import { BrowserRouter } from 'react-router-dom';
-
-import dboard from './pages/Dashboard';
-
-const Dashboard = () => <Async load={dboard} />;
+import Dashboard from './pages/Dashboard';
 
 ReactDOM.render(
   <BrowserRouter>
-    <Dashboard />
+    <Async load={<Dashboard />} />
   </BrowserRouter>,
   document.getElementById('root')
 );

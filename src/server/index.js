@@ -11,6 +11,7 @@ const buildPath = path.resolve('build');
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+
 app.use(express.static(buildPath));
 
 app.get('/!*', function(req, res) {
