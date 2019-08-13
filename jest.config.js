@@ -26,7 +26,6 @@ module.exports = {
   resetMocks: true,
   restoreMocks: true,
   roots: ['<rootDir>/src/'],
-  setupFiles: ['<rootDir>/utils/test-setup.js'],
   snapshotSerializers: ['enzyme-to-json/serializer'],
   testMatch: ['**/__tests__/*.(jsx|js)']
 };
