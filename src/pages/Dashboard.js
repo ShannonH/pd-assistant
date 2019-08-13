@@ -29,7 +29,6 @@ import { getUserDetails, getUserAvatar } from '../api/GraphService';
 import DrawerList from '../components/drawerList';
 import ErrorBoundary from '../components/errorBoundary';
 import NavBar from '../components/NavBar';
-//import * as config from '../Config';
 import SnackBar from '../components/snackbar';
 import { dark, light } from '../styles/palette';
 import { styles } from '../styles/styles';
