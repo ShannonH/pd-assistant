@@ -179,8 +179,6 @@ def publish() {
       GIT.add( 'package-lock.json' )
       GIT.commit( "Automatic version bump $version" )
       GIT.push()
-
-      NODE.publish()
     }
   }
 }
