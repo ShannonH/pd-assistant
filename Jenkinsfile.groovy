@@ -12,12 +12,12 @@ SLACK_CHANNEL = '@theshannon'
 // Some tunables you may want to update, depending on your project. Use the "Pod finished: metrics are at <link>"
 // link to help tune these
 
-TIMEOUT = 60 // minutes
+TIMEOUT = 30 // minutes
 CPU_LIMIT = '0.2' // cores
 MEM_LIMIT = '1Gi' // memory limit, in gigabytes
 
 properties( [
-  buildDiscarder( logRotator( daysToKeepStr: '180', numToKeepStr: '30' ) ),
+  buildDiscarder( logRotator( daysToKeepStr: '180', numToKeepStr: '5' ) ),
   disableConcurrentBuilds(),
 ] )
 
