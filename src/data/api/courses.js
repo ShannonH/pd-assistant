@@ -1,26 +1,31 @@
-import axios from 'axios';
-import axiosCookieJarSupport from 'axios-cookiejar-support';
-import * as tough from 'tough-cookie';
-import debug0 from 'debug';
+const axios = require('axios');
+const axiosCookieJarSupport = require('axios-cookiejar-support');
+const debug0 = require('debug');
 
 const debug = debug0('slash-command-template:index');
 
-axiosCookieJarSupport(axios);
-const cookieJar = new tough.CookieJar();
+axiosCookieJarSupport.default(axios);
 
 let instance = axios.create({
-  jar: cookieJar,
   withCredentials: true
 });
 
-const baseCourse = (adminPassword, baseUrl, xsrfToken, coursePayload) => {
+const createCourse = (
+  adminPassword,
+  baseUrl,
+  xsrfToken,
+  coursePayload,
+  cookieJar
+) => {
+  instance.defaults.jar = cookieJar;
   instance.defaults.baseURL = baseUrl;
   instance.defaults.headers = {
     'X-Blackboard-XSRF': xsrfToken,
     'Content-Type': 'application/json'
   };
+  //console.log(instance.defaults);
   let courseJson = JSON.stringify(coursePayload);
-  debug('Here is the course JSON we are sending: ' + courseJson);
+  //console.log('Here is the course JSON we are sending: ' + courseJson);
   return instance
     .post(
       '/learn/api/v1/courses?fields=courseId,name,ultraStatus,description,externalAccessUrl',
@@ -28,11 +33,11 @@ const baseCourse = (adminPassword, baseUrl, xsrfToken, coursePayload) => {
     )
     .then(createdCourse => {
       if (createdCourse.status === 201) {
-        debug(createdCourse.data.courseId);
+        console.log(createdCourse.data);
         return createdCourse;
       }
     })
     .catch(error => console.log('Course create failed somewhere :( ' + error));
 };
 
-export default baseCourse;
+module.exports = { createCourse };

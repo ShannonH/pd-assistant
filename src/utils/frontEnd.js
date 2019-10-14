@@ -10,7 +10,8 @@ export async function asyncFetch(method, endpoint, body, token) {
       })
     : (headers = {
         'content-type': 'application/json',
-        accept: 'application/json'
+        'Access-Control-Allow-Headers': '*'
+        //accept: 'application/json'
       });
   try {
     const response = await fetch(`${API}${endpoint}`, {

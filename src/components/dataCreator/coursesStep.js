@@ -92,12 +92,12 @@ function CourseAvailableRadios(props) {
       onChange={props.onChange}>
       <FormControlLabel
         label={'Available'}
-        value={'enabled'}
+        value={'Enabled'}
         control={<Radio />}
       />
       <FormControlLabel
         label={'Unavailable'}
-        value={'disabled'}
+        value={'Disabled'}
         control={<Radio />}
       />
     </RadioGroup>

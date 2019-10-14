@@ -2,7 +2,7 @@ import React from 'react';
 import * as dateFns from 'date-fns';
 import '../styles/calendarStyles.css';
 import { Card } from '@material-ui/core';
-import { getEvents } from '../api/GraphService';
+import { getEvents } from '../data/api/GraphService';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { styles } from '../styles/styles';
 import classNames from 'classnames';

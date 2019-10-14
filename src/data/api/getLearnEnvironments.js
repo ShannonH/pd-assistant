@@ -244,4 +244,4 @@ const getLearnConfig = hostname => {
   }
 };
 
-export default getLearnConfig;
+module.exports = { getLearnConfig };

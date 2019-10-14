@@ -25,7 +25,7 @@ import { UserAgentApplication } from 'msal';
 import * as PropTypes from 'prop-types';
 import React, { lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { getUserDetails, getUserAvatar } from '../api/GraphService';
+import { getUserDetails, getUserAvatar } from '../data/api/GraphService';
 import DrawerList from '../components/drawerList';
 import ErrorBoundary from '../components/errorBoundary';
 import NavBar from '../components/NavBar';
@@ -92,12 +92,12 @@ class Dashboard extends React.Component {
   handleDarkMode = async () => {
     if (!this.state.darkMode) {
       this.setState({ darkMode: true });
-      await asyncFetch('put', '/preferences/' + this.state.user.id, {
+      await asyncFetch('post', '/preferences/' + this.state.user.id, {
         darkMode: true
       });
     } else {
       this.setState({ darkMode: false });
-      await asyncFetch('put', '/preferences/' + this.state.user.id, {
+      await asyncFetch('post', '/preferences/' + this.state.user.id, {
         darkMode: false
       });
     }
@@ -300,6 +300,7 @@ class Dashboard extends React.Component {
   async findOrCreateUser(user) {
     //this really needs to use the sequelize findOrCreate or upsert methods, but can't figure it out using epilogue endpoints
     asyncFetch('get', '/users/' + user.id).then(result => {
+      console.log(result);
       if (result.message === 'Not Found') {
         asyncFetch('post', '/users', {
           displayName: user.displayName,

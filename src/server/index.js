@@ -1,26 +1,22 @@
 require('dotenv').config({ path: '.env.local' });
-
-const express = require('express');
+const routes = require('./routes');
 const cors = require('cors');
-const bodyParser = require('body-parser');
+const express = require('express');
 const epilogue = require('epilogue');
 const Sequelize = require('sequelize');
 const path = require('path');
-//const buildPath = path.resolve('build');
 
 const app = express();
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(cors());
-app.use(bodyParser.json());
-
-/*app.use(express.static(buildPath));
-
-app.get('/!*', function(req, res) {
-  res.sendFile(path.join(buildPath, 'index.html'));
-});*/
+app.enable('trust proxy');
+routes(app);
 
 const database = new Sequelize({
   dialect: 'sqlite',
-  storage: './src/data/ep-assistant.sqlite',
+  storage: './src/data/pd-assistant.sqlite',
   define: {
     timestamps: false
   }
@@ -95,3 +91,5 @@ database.sync().then(() => {
     console.log(`Listening on port ${port}`);
   });
 });
+
+module.exports = { app };
