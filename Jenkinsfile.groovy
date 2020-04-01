@@ -7,7 +7,6 @@
 
 GIT_CHECKOUT_URL = 'ssh://git@stash.bbpd.io/~sharris/pd-assistant.git'
 PROJECT_NAME = 'pd-assistant'
-SLACK_CHANNEL = '@theshannon'
 
 // Some tunables you may want to update, depending on your project. Use the "Pod finished: metrics are at <link>"
 // link to help tune these
@@ -83,9 +82,7 @@ timeout( time: TIMEOUT, unit: 'MINUTES' ) {
 
 def withFailureNotifiers( Closure block ) {
   bb.stash.notifier {
-    withSlackNotifier( SLACK_CHANNEL, [ verbosity: 'changesOnly', silenced: !isProductionBranch() ] ) {
       block()
-    }
   }
 }
 
