@@ -1,12 +1,12 @@
 const getLearnConfig = hostname => {
-  if (hostname === 'ultra-integ') {
+  if (hostname === 'ultra-canary') {
     return {
-      baseUrl: 'https://ultra-integ.int.bbpd.io',
+      baseUrl: 'https://ultra-canary.bbpd.io',
       password: 'ZwFPGT6lgSIapw'
     };
-  } else if (hostname === 'ultra-dev') {
+  } else if (hostname === 'ultra-next') {
     return {
-      baseUrl: 'https://ultra-dev.int.bbpd.io',
+      baseUrl: 'https://ultra-next.bbpd.io',
       password: 'hAllow33n!%'
     };
   } else if (hostname === 'qa-ultra-adv-dev') {
@@ -24,11 +24,6 @@ const getLearnConfig = hostname => {
       baseUrl: 'https://qa-original-adv-dev.int.bbpd.io',
       password: '45584d8f0676'
     };
-  } else if (hostname === 'qa-original-std-ivp') {
-    return {
-      baseUrl: 'https://qa-original-std-ivp.int.bbpd.io',
-      password: 'hAllow33n!%'
-    };
   } else if (hostname === 'qa-ultra-adv-rc') {
     return {
       baseUrl: 'https://qa-ultra-adv-rc.int.bbpd.io',
@@ -38,11 +33,6 @@ const getLearnConfig = hostname => {
     return {
       baseUrl: 'https://qa-trylearn-std-rc.int.bbpd.io',
       password: '557b6b76ede3'
-    };
-  } else if (hostname === 'qa-original-std-rc') {
-    return {
-      baseUrl: 'https://qa-original-std-rc.int.bbpd.io',
-      password: '46f665d874dd'
     };
   } else if (hostname === 'qa-original-adv-rc') {
     return {
@@ -208,36 +198,6 @@ const getLearnConfig = hostname => {
     return {
       baseUrl: 'https://b2dev-nahe-new.int.bbpd.io',
       password: '10887151a7a4'
-    };
-  } else if (hostname === 'dev-lgw1-plus') {
-    return {
-      baseUrl: 'https://dev-lgw1-plus.int.bbpd.io',
-      password: '5935cebd7fdd'
-    };
-  } else if (hostname === 'dev-lgw2-plus') {
-    return {
-      baseUrl: 'https://dev-lgw2-plus.int.bbpd.io',
-      password: '471ac3d022e1'
-    };
-  } else if (hostname === 'allyinteg') {
-    return {
-      baseUrl: 'https://allyinteg.int.bbpd.io',
-      password: 'a18e36eed13d'
-    };
-  } else if (hostname === 'getwelltemp') {
-    return {
-      baseUrl: 'https://getwelltemp.int.bbpd.io',
-      password: 'f21a209e0dd2'
-    };
-  } else if (hostname === 'getwelltempno2') {
-    return {
-      baseUrl: 'https://getwelltempno2.int.bbpd.io',
-      password: 'e2dd5e8dce71'
-    };
-  } else if (hostname === 'vhs') {
-    return {
-      baseUrl: 'https://vhs.int.bbpd.io',
-      password: 'e3e1a0655f62'
     };
   } else {
     return 'nope';

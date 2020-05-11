@@ -9,8 +9,8 @@ import {
   PeopleRounded as TeamIcon,
   HomeRounded as HomeIcon,
   BarChart as BarCharIcon,
-  School as CreateIcon,
-  ViewList as ProjectsIcon
+  ViewList as ProjectsIcon,
+  AddCircleOutline as CreateIcon
 } from '@material-ui/icons';
 import * as PropTypes from 'prop-types';
 import React from 'react';
@@ -47,22 +47,22 @@ class DrawerList extends React.Component {
         <ListItemLink
           to='/home'
           primary='Home'
-          icon={<HomeIcon color={'secondary'} />}
+          icon={<HomeIcon color={'primary'} />}
         />
         <ListItemLink
           to={'/dataCreator'}
           primary={'Data Creator'}
-          icon={<CreateIcon color={'secondary'} />}
+          icon={<CreateIcon color={'primary'} />}
         />
         <ListItemLink
           to={'/analyses'}
           primary={'Risk Analysis'}
-          icon={<BarCharIcon color={'secondary'} />}
+          icon={<BarCharIcon color={'primary'} />}
         />
         <ListItemLink
           to={'/uiaAssist'}
           primary={'UIA Assist'}
-          icon={<CodeIcon color={'secondary'} />}
+          icon={<CodeIcon color={'primary'} />}
         />
         <Divider component={'div'} />
         {this.props.isAuthenticated ? (
@@ -70,12 +70,12 @@ class DrawerList extends React.Component {
             <ListItemLink
               to={'/teams'}
               primary={'Teams'}
-              icon={<TeamIcon color={'secondary'} />}
+              icon={<TeamIcon color={'primary'} />}
             />
             <ListItemLink
               to={'/projects'}
               primary={'Projects'}
-              icon={<ProjectsIcon color={'secondary'} />}
+              icon={<ProjectsIcon color={'primary'} />}
             />
           </div>
         ) : (

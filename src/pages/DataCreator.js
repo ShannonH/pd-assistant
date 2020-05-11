@@ -280,7 +280,7 @@ class DataCreator extends React.Component {
                   )}
                   <Button
                     variant='outlined'
-                    color='secondary'
+                    color='primary'
                     onClick={this.handleNext}
                     className={classnames(classes.stepperButton)}>
                     {activeStep === steps.length - 1 ? 'Finish' : 'Next'}

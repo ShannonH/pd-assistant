@@ -35,20 +35,20 @@ function TeamCard(props) {
           gutterBottom
           variant='h5'
           component='h2'
-          color={'secondary'}>
+          color={'primary'}>
           {teamName}
         </Typography>
       </CardContent>
       <CardActions style={{ float: 'left' }}>
         <Tooltip title='Projects'>
           <LinkedIconButton
-            icon={<ProjectsIcon color='secondary' />}
+            icon={<ProjectsIcon color='primary' />}
             to={'/projects'}
           />
         </Tooltip>
         <Tooltip title='Analyses'>
           <LinkedIconButton
-            icon={<BarChart color='secondary' />}
+            icon={<BarChart color='primary' />}
             to={'/analyses'}
           />
         </Tooltip>
@@ -56,7 +56,7 @@ function TeamCard(props) {
       <CardActions style={{ float: 'right' }}>
         <Tooltip title='Remove Team'>
           <IconButton
-            color='secondary'
+            color='primary'
             children={<Delete />}
             onClick={() => handleDelete(props.team)}
           />

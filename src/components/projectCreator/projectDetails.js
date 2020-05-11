@@ -8,7 +8,7 @@ function ProjectDetails(props) {
       <Typography
         variant={'h6'}
         gutterBottom
-        color={'secondary'}
+        color={'primary'}
         style={{ padding: 20 }}>
         Project Name: {props.name}
       </Typography>

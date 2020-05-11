@@ -298,7 +298,7 @@ class Dashboard extends React.Component {
   }
 
   async findOrCreateUser(user) {
-    //this really needs to use the sequelize findOrCreate or upsert methods, but can't figure it out using epilogue endpoints
+    //this really needs to use the sequelize findOrCreate or upsert methods, but can't figure it out using finale endpoints
     asyncFetch('get', '/users/' + user.id).then(result => {
       console.log(result);
       if (result.message === 'Not Found') {
@@ -355,7 +355,7 @@ class Dashboard extends React.Component {
       if (error.errorMessage.indexOf('interaction_required') !== -1) {
         this.userAgentApplication
           .acquireTokenPopup({ scopes: ['user.read'] })
-          .then(function(accessTokenResponse) {
+          .then(function (accessTokenResponse) {
             const user = getUserDetails(accessTokenResponse.accessToken);
             const userAvatar = getUserAvatar(accessTokenResponse.accessToken);
             this.setState({
@@ -370,7 +370,7 @@ class Dashboard extends React.Component {
             });
           })
           .then(() => this.findOrCreateUser(this.state.user.id))
-          .catch(function(error) {
+          .catch(function (error) {
             this.setState({
               error: { error }
             });

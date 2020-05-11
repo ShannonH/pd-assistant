@@ -49,7 +49,7 @@ class Teams extends Component {
     }).then(result => {
       if (result.name === this.state.newTeam) {
         this.state.teams.push(result);
-        this.setState({ dialogOpen: false });
+        this.handleCloseDialog();
       }
     });
   };

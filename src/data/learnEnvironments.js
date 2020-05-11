@@ -1,6 +1,6 @@
 export const LEARNS = [
-  { label: 'https://ultra-integ.int.bbpd.io', hostname: 'ultra-integ' },
-  { label: 'https://ultra-dev.int.bbpd.io', hostname: 'ultra-dev' },
+  { label: 'https://ultra-canary.bbpd.io', hostname: 'ultra-canary' },
+  { label: 'https://ultra-next.bbpd.io', hostname: 'ultra-next' },
   {
     label: 'https://qa-ultra-adv-dev.int.bbpd.io',
     hostname: 'qa-ultra-adv-dev'
@@ -13,18 +13,10 @@ export const LEARNS = [
     label: 'https://qa-original-adv-dev.int.bbpd.io',
     hostname: 'qa-original-adv-dev'
   },
-  {
-    label: 'https://qa-original-std-ivp.int.bbpd.io',
-    hostname: 'qa-original-std-ivp'
-  },
   { label: 'https://qa-ultra-adv-rc.int.bbpd.io', hostname: 'qa-ultra-adv-rc' },
   {
     label: 'https://qa-trylearn-std-rc.int.bbpd.io',
     hostname: 'qa-trylearn-std-rc'
-  },
-  {
-    label: 'https://qa-original-std-rc.int.bbpd.io',
-    hostname: 'qa-original-std-rc'
   },
   {
     label: 'https://qa-original-adv-rc.int.bbpd.io',
@@ -125,12 +117,6 @@ export const LEARNS = [
   { label: 'https://sisaas-learn-qa.int.bbpd.io', hostname: 'sisaas-learn-qa' },
   { label: 'https://ultra-predict.int.bbpd.io', hostname: 'ultra-predict' },
   { label: 'https://b2dev-nahe-new.int.bbpd.io', hostname: 'b2dev-nahe-new' },
-  { label: 'https://dev-lgw1-plus.int.bbpd.io', hostname: 'dev-lgw1-plus' },
-  { label: 'https://dev-lgw2-plus.int.bbpd.io', hostname: 'dev-lgw2-plus' },
-  { label: 'https://allyinteg.int.bbpd.io', hostname: 'allyinteg' },
-  { label: 'https://getwelltemp.int.bbpd.io', hostname: 'getwelltemp' },
-  { label: 'https://getwelltempno2.int.bbpd.io', hostname: 'getwelltempno2' },
-  { label: 'https://vhs.int.bbpd.io', hostname: 'vhs' },
   { label: 'Other', hostname: 'Other' }
 ];
 

@@ -27,6 +27,9 @@ export const styles = theme => ({
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(6)
   },
+  paper: {
+    background: theme.palette.primary
+  },
   midTextField: {
     width: 300
   },
